@@ -6,7 +6,7 @@ format:
   html:
     embed-resources: false
     code-fold: true
-bibliography: references.bib
+bibliography: overdispersion_refs.bib
 link-citations: true
 knitr:
   opts_chunk:        ########## set global options ############

@@ -1,19 +1,1468 @@
-@article{knuth84,
-  author = {Knuth, Donald E.},
-  title = {Literate Programming},
-  year = {1984},
-  issue_date = {May 1984},
-  publisher = {Oxford University Press, Inc.},
-  address = {USA},
-  volume = {27},
-  number = {2},
-  issn = {0010-4620},
-  url = {https://doi.org/10.1093/comjnl/27.2.97},
-  doi = {10.1093/comjnl/27.2.97},
-  journal = {Comput. J.},
-  month = may,
-  pages = {97–111},
-  numpages = {15}
+
+@article{noauthor_notitle_nodate,
 }
 
+@book{van_buuren_flexible_nodate,
+	edition = {Second},
+	title = {Flexible {Imputation} of {Missing} {Data}},
+	shorttitle = {Flexible {Imputation}},
+	url = {https://stefvanbuuren.name/fimd/},
+	abstract = {Flexible Imputation of Missing Data, Second Edition},
+	urldate = {2025-08-01},
+	publisher = {CRC Press},
+	author = {van Buuren, Stef},
+	file = {Snapshot:/Users/oliviawilliamson/Zotero/storage/442PEYRZ/fimd.html:text/html},
+}
 
+@article{petrazzini_evaluation_2021,
+	title = {Evaluation of different approaches for missing data imputation on features associated to genomic data},
+	volume = {14},
+	issn = {1756-0381},
+	url = {https://doi.org/10.1186/s13040-021-00274-7},
+	doi = {10.1186/s13040-021-00274-7},
+	abstract = {Missing data is a common issue in different fields, such as electronics, image processing, medical records and genomics. They can limit or even bias the posterior analysis. The data collection process can lead to different distribution, frequency, and structure of missing data points. They can be classified into four categories: Structurally Missing Data (SMD), Missing Completely At Random (MCAR), Missing At Random (MAR) and Missing Not At Random (MNAR). For the three later, and in the context of genomic data (especially non-coding data), we will discuss six imputation approaches using 31,245 variants collected from ClinVar and annotated with 13 genome-wide features.},
+	number = {1},
+	urldate = {2025-08-01},
+	journal = {BioData Mining},
+	author = {Petrazzini, Ben Omega and Naya, Hugo and Lopez-Bello, Fernando and Vazquez, Gustavo and Spangenberg, Lucía},
+	month = sep,
+	year = {2021},
+	keywords = {genomics, imputation, Machine learning, missing data, pathogenic variants},
+	pages = {44},
+	annote = {Key Points
+
+
+Methods evaluatedThe study compared five imputation methods applied to genomic annotation features: Random Forest (missForest), k‑Nearest Neighbors (kNN), MICE (Multivariate Imputation by Chained Equations), EMB via Amelia, and a Bayesian approach (mi). A simple mean-imputation baseline was also included BioMed Central+1ResearchGate+1.
+
+
+Missingness scenariosSimulated three types of missingness—MCAR (missing completely at random), MAR (missing at random), and MNAR (missing not at random)—using ClinVar-derived coding and non-coding variant features. MAR was simulated by masking depending on other observed features; MNAR by removing dependent features altogether BioMed Central+3BioMed Central+3ResearchGate+3.
+
+
+Performance resultsRandom Forest and kNN consistently achieved the lowest RMSE and MAE across MCAR, MAR, and MNAR scenarios. kNN performed nearly as well as Random Forest but was more computationally efficient, making it more practical for large genomic datasets ResearchGate+1BioMed Central+1.
+
+
+R package developmentThe authors developed an R package NAsImpute (available on GitHub) to simulate missingness and compare imputation methods, facilitating algorithm selection on new genomic datasets ResearchGatemedrxiv.org+8BioMed Central+8ResearchGate+8.
+
+
+Limitations and gaps
+
+
+Real-world genomic datasets can be much higher dimensional than the {\textasciitilde}30K variant, {\textasciitilde}13-feature dataset used. RF and kNN may not scale well (RF took {\textasciitilde}10 h vs. kNN {\textasciitilde}8 h on powerful hardware) arXiv+5BioMed Central+5arXiv+5ResearchGate.
+
+
+Under extreme missingness patterns, Random Forest performance degrades more severely than kNNResearchGate.
+
+
+While simulations covered MNAR, the structure of MNAR was contrived (by feature removal), and may not capture all real-use-case complexities.
+
+
+Focused on genomic annotation; generalization to other data types (e.g. clinical tabular data) remains untested.
+
+
+
+
+In genomic variant annotation datasets, especially with non-coding variants, algorithmic methods like kNN and Random Forest outperform traditional imputation (e.g., MICE, mean imputation), even under MNAR. While RF is slightly more accurate, kNN is often the most practical choice given computational constraints and robustness. However, results stem from simulated rather than observational missingness, and applicability outside genomic feature matrices has yet to be validated.
+},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/SRDVZQYR/Petrazzini et al. - 2021 - Evaluation of different approaches for missing data imputation on features associated to genomic dat.pdf:application/pdf;Snapshot:/Users/oliviawilliamson/Zotero/storage/CPCIVYTG/s13040-021-00274-7.html:text/html},
+}
+
+@article{yang_estimation_nodate,
+	title = {Estimation and {Prediction} {Problems} in {Missing} {Data}},
+	language = {en},
+	author = {Yang, Yachong},
+	annote = {Key Points
+
+
+Framework \& ScopeThis PhD thesis advances rigorous methods for handling missing data using semiparametric theory and conformal prediction, focusing especially on settings with covariate shift and complex missingness. It develops new pseudo‑outcome based estimators that deliver robust inference and prediction under weaker distributional assumptions ScholarlyCommons.
+
+
+Proposed methods
+
+
+Conformal prediction algorithms ("validity-first" and "efficiency-first") optimized to select machine learning models that minimize prediction set width while ensuring finite-sample or asymptotic coverage.
+
+
+Pseudo-outcome estimation using doubly robust, influence-function-based methods to handle missing response scenarios and causal inference tasks under both MAR and MNAR (via shadow variable frameworks) ScholarlyCommons+1ScholarlyCommons+1.
+
+
+
+
+Assumptions on Missingness
+
+
+Assumes covariate shift between training and test data: the covariate distributions can differ while response mechanisms or conditional relationships may remain consistent ScholarlyCommons.
+
+
+For handling MNAR, leverages shadow variable assumptions (a proxy observed variable linked to missing outcomes) to enable identification under nonignorable missingness.
+
+
+Standard MAR/unconfoundedness settings for causal inference are also addressed via doubly robust pseudo‑outcomes ScholarlyCommons+4ScholarlyCommons+4ScholarlyCommons+4.
+
+
+Limitations \& Gaps
+
+
+Theoretical focus: The dissertation is heavily theory-driven, emphasizing semiparametric identification and asymptotic properties, but provides limited empirical demonstrations or practical guidelines.
+
+
+Dependence on identifying conditions: Results rely critically on conditions such as availability of a valid shadow variable or correct specification of nuisance models; violations may compromise validity.
+
+
+Computational implementation details: While the methods (e.g., conformal regions, pseudo‑outcomes) are mathematically formalized, the work offers limited discussion of scalable algorithms or software implementation.
+
+
+This dissertation presents a powerful statistical foundation for prediction and inference under missing data—even when standard exchangeability or ignorability assumptions fail. By marrying conformal prediction and semiparametric pseudo‑outcomes, it offers tools for valid coverage and efficiency in prediction. However, applying these methods in practice may require careful attention to assumptions and further implementation work.
+},
+	file = {PDF:/Users/oliviawilliamson/Zotero/storage/5VI84J69/Yang - ESTIMATION AND PREDICTION PROBLEMS IN MISSING DATA.pdf:application/pdf},
+}
+
+@article{heymans_handling_2022,
+	title = {Handling missing data in clinical research},
+	volume = {151},
+	issn = {0895-4356},
+	url = {https://www.sciencedirect.com/science/article/pii/S0895435622002189},
+	doi = {10.1016/j.jclinepi.2022.08.016},
+	abstract = {Because missing data are present in almost every study, it is important to handle missing data properly. First of all, the missing data mechanism should be considered. Missing data can be either completely at random (MCAR), at random (MAR), or not at random (MNAR). When missing data are MCAR, a complete case analysis can be valid. Also when missing data are MAR, in some situations a complete case analysis leads to valid results. However, in most situations, missing data imputation should be used. Regarding imputation methods, it is highly advised to use multiple imputations because multiple imputations lead to valid estimates including the uncertainty about the imputed values. When missing data are MNAR, also multiple imputations do not lead to valid results. A complication hereby is that it not possible to distinguish whether missing data are MAR or MNAR. Finally, it should be realized that preventing to have missing data is always better than the treatment of missing data.},
+	urldate = {2025-08-02},
+	journal = {Journal of Clinical Epidemiology},
+	author = {Heymans, Martijn W. and Twisk, Jos W. R.},
+	month = nov,
+	year = {2022},
+	pages = {185--188},
+	annote = {Key Points
+
+
+Scope and PurposeThe paper provides a comprehensive methodological guidance on handling missing data in clinical research settings. It outlines decision frameworks for different approaches, from deletion to multiple imputation, and emphasizes best practices in analysis and reporting Copyright Marketplace+2ScienceDirect+2Zurich Open Repository and Archive+2.
+
+
+Methodological RecommendationsIt reviews approaches including complete-case analysis (listwise deletion), single imputation, and multiple imputation(e.g., MICE), as well as model-based strategies such as full-information maximum likelihood and expectation-maximization, with guidance on when each is appropriate based on missingness patterns ScienceDirect.
+
+
+Missingness Assumptions DiscussedThe paper clearly articulates the classic Rubin taxonomy—MCAR, MAR, and MNAR—and discusses implications for bias and validity of different methods under each missingness mechanismpmc.ncbi.nlm.nih.gov+5pmc.ncbi.nlm.nih.gov+5en.wikipedia.org+5bmcmedresmethodol.biomedcentral.com+2ScienceDirect+2en.wikipedia.org+2.
+
+
+Limitations \& Gaps
+
+
+No empirical comparison: This is a narrative/methods review and does not present new simulation studies or apply methods to real datasets.
+
+
+Limited attention to modern ML-based approaches: Recent methods like missForest or GAN-based imputation (e.g. GAIN) are not addressed.
+
+
+Sensitivity under MNAR: Practical strategies for assessing robustness under MNAR are mentioned but not deeply developed. Guiding principles for choosing sensitivity scenarios are limited.
+
+
+
+
+This paper serves as a strong primer for clinical researchers, offering clear advice on matching missing data methods to underlying assumptions. It emphasizes the importance of understanding missingness mechanisms before analysis and choosing appropriate methods accordingly. However, it does not provide new empirical evidence, leaves out advanced modern machine learning imputation techniques, and provides limited actionable guidance on conducting or interpreting MNAR sensitivity analyses.
+},
+	file = {ScienceDirect Snapshot:/Users/oliviawilliamson/Zotero/storage/W6RRHBHL/S0895435622002189.html:text/html},
+}
+
+@article{stekhoven_missforest--non-parametric_2012,
+	title = {{MissForest}--non-parametric missing value imputation for mixed-type data},
+	volume = {28},
+	issn = {1367-4811},
+	doi = {10.1093/bioinformatics/btr597},
+	abstract = {MOTIVATION: Modern data acquisition based on high-throughput technology is often facing the problem of missing data. Algorithms commonly used in the analysis of such large-scale data often depend on a complete set. Missing value imputation offers a solution to this problem. However, the majority of available imputation methods are restricted to one type of variable only: continuous or categorical. For mixed-type data, the different types are usually handled separately. Therefore, these methods ignore possible relations between variable types. We propose a non-parametric method which can cope with different types of variables simultaneously.
+RESULTS: We compare several state of the art methods for the imputation of missing values. We propose and evaluate an iterative imputation method (missForest) based on a random forest. By averaging over many unpruned classification or regression trees, random forest intrinsically constitutes a multiple imputation scheme. Using the built-in out-of-bag error estimates of random forest, we are able to estimate the imputation error without the need of a test set. Evaluation is performed on multiple datasets coming from a diverse selection of biological fields with artificially introduced missing values ranging from 10\% to 30\%. We show that missForest can successfully handle missing values, particularly in datasets including different types of variables. In our comparative study, missForest outperforms other methods of imputation especially in data settings where complex interactions and non-linear relations are suspected. The out-of-bag imputation error estimates of missForest prove to be adequate in all settings. Additionally, missForest exhibits attractive computational efficiency and can cope with high-dimensional data.
+AVAILABILITY: The package missForest is freely available from http://stat.ethz.ch/CRAN/.
+CONTACT: stekhoven@stat.math.ethz.ch; buhlmann@stat.math.ethz.ch},
+	language = {eng},
+	number = {1},
+	journal = {Bioinformatics (Oxford, England)},
+	author = {Stekhoven, Daniel J. and Bühlmann, Peter},
+	month = jan,
+	year = {2012},
+	pmid = {22039212},
+	keywords = {Algorithms, Arabidopsis, Data Interpretation, Statistical, Escherichia coli, Gene Expression Profiling, Humans, Oligonucleotide Array Sequence Analysis},
+	pages = {112--118},
+}
+
+@inproceedings{yoon_gain_2018,
+	title = {{GAIN}: {Missing} {Data} {Imputation} using {Generative} {Adversarial} {Nets}},
+	shorttitle = {{GAIN}},
+	url = {https://proceedings.mlr.press/v80/yoon18a.html},
+	abstract = {We propose a novel method for imputing missing data by adapting the well-known Generative Adversarial Nets (GAN) framework. Accordingly, we call our method Generative Adversarial Imputation Nets (GAIN). The generator (G) observes some components of a real data vector, imputes the missing components conditioned on what is actually observed, and outputs a completed vector. The discriminator (D) then takes a completed vector and attempts to determine which components were actually observed and which were imputed. To ensure that D forces G to learn the desired distribution, we provide D with some additional information in the form of a hint vector. The hint reveals to D partial information about the missingness of the original sample, which is used by D to focus its attention on the imputation quality of particular components. This hint ensures that G does in fact learn to generate according to the true data distribution. We tested our method on various datasets and found that GAIN significantly outperforms state-of-the-art imputation methods.},
+	language = {en},
+	urldate = {2025-08-02},
+	booktitle = {Proceedings of the 35th {International} {Conference} on {Machine} {Learning}},
+	publisher = {PMLR},
+	author = {Yoon, Jinsung and Jordon, James and Schaar, Mihaela},
+	month = jul,
+	year = {2018},
+	note = {ISSN: 2640-3498},
+	pages = {5689--5698},
+	annote = {Key Points
+
+
+Proposed method:Introduces Generative Adversarial Imputation Nets (GAIN)—a GAN-based framework where a generator imputes missing components in a data vector, and a discriminator attempts to distinguish which values were originally observed vs. imputed. A hint vector informs the discriminator partially about missingness, guiding the generator to model the true data distribution accurately Proceedings of Machine Learning Research+1GitHub+1.
+
+
+Missingness assumptions:The method does not assume MAR or MCAR specifically; it is designed to learn the joint distribution of data even when entries are missing (implicitly assumes the missingness process is independent enough that GAN conditioning suffices). In practice, simulation studies use MCAR (e.g. random missing entries) to evaluate performanceMedRxiv+6Proceedings of Machine Learning Research+6SCIRP+6.
+
+
+Evaluation \& performance:Tested across multiple UCI datasets (e.g., Letter, Spam, Breast Cancer), GAIN significantly outperforms traditional imputation methods such as MICE, missForest, autoencoders, and expectation-maximization, particularly in RMSE of imputed values arXiv+5Proceedings of Machine Learning Research+5Stats Ministry+5.
+
+
+Limitations / gaps:
+
+
+Lacks explicit modeling of missingness mechanism: there’s no built-in handling of MAR/MNAR differentiation or sensitivity to these assumptions.
+
+
+Evaluation limited to simulated MCAR settings: does not test performance under real-world MAR or MNAR scenarios.
+
+
+Dependency on GAN training stability: neural network-based approach requires tuning and may suffer from mode collapse or instability with small datasets.
+
+
+Scalability and computational cost: GAIN may be heavy, and performance/generalizability on very high-dimensional or structured data isn’t thoroughly tested.
+
+
+
+
+GAIN offers a compelling deep learning–based imputation method that empirically surpasses many traditional techniques across standard benchmarks. By recasting imputation as a GAN game, it learns plausible value distributions in a flexible and data-driven way. That said, it doesn’t explicitly account for common missingness mechanisms like MAR or MNAR, remains evaluated primarily in MCAR simulations, and may struggle under small-sample or high-dimensional settings. Future work is needed to assess GAIN under real-world missingness structures and to incorporate mechanism awareness.
+},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/NYTK4T4Q/Yoon et al. - 2018 - GAIN Missing Data Imputation using Generative Adversarial Nets.pdf:application/pdf;Supplementary PDF:/Users/oliviawilliamson/Zotero/storage/J8DEEZMQ/Yoon et al. - 2018 - GAIN Missing Data Imputation using Generative Adversarial Nets.pdf:application/pdf},
+}
+
+@article{waljee_comparison_2013,
+	title = {Comparison of imputation methods for missing laboratory data in medicine},
+	volume = {3},
+	copyright = {Published by the BMJ Publishing Group Limited. For permission to use (where not already granted under a licence) please go to http://group.bmj.com/group/rights-licensing/permissions. This is an Open Access article distributed in accordance with the Creative Commons Attribution Non Commercial (CC BY-NC 3.0) license, which permits others to distribute, remix, adapt, build upon this work non-commercially, and license their derivative works on different terms, provided the original work is properly cited and the use is non-commercial. See: http://creativecommons.org/licenses/by-nc/3.0/},
+	issn = {2044-6055, 2044-6055},
+	url = {https://bmjopen.bmj.com/content/3/8/e002847},
+	doi = {10.1136/bmjopen-2013-002847},
+	abstract = {Objectives Missing laboratory data is a common issue, but the optimal method of imputation of missing values has not been determined. The aims of our study were to compare the accuracy of four imputation methods for missing completely at random laboratory data and to compare the effect of the imputed values on the accuracy of two clinical predictive models.
+Design Retrospective cohort analysis of two large data sets.
+Setting A tertiary level care institution in Ann Arbor, Michigan.
+Participants The Cirrhosis cohort had 446 patients and the Inflammatory Bowel Disease cohort had 395 patients.
+Methods Non-missing laboratory data were randomly removed with varying frequencies from two large data sets, and we then compared the ability of four methods—missForest, mean imputation, nearest neighbour imputation and multivariate imputation by chained equations (MICE)—to impute the simulated missing data. We characterised the accuracy of the imputation and the effect of the imputation on predictive ability in two large data sets.
+Results MissForest had the least imputation error for both continuous and categorical variables at each frequency of missingness, and it had the smallest prediction difference when models used imputed laboratory values. In both data sets, MICE had the second least imputation error and prediction difference, followed by the nearest neighbour and mean imputation.
+Conclusions MissForest is a highly accurate method of imputation for missing laboratory data and outperforms other common imputation techniques in terms of imputation error and maintenance of predictive ability with imputed values in two clinical predicative models.},
+	language = {en},
+	number = {8},
+	urldate = {2025-08-02},
+	journal = {BMJ Open},
+	author = {Waljee, Akbar K. and Mukherjee, Ashin and Singal, Amit G. and Zhang, Yiwei and Warren, Jeffrey and Balis, Ulysses and Marrero, Jorge and Zhu, Ji and Higgins, Peter DR},
+	month = aug,
+	year = {2013},
+	pmid = {23906948},
+	note = {Publisher: British Medical Journal Publishing Group
+Section: Gastroenterology and hepatology},
+	pages = {e002847},
+	annote = {Key Points
+
+
+Method(s) evaluatedThe study compares four common imputation techniques for missing laboratory data under a Missing Completely at Random (MCAR) assumption:
+
+
+Mean imputation,
+
+
+Nearest‑neighbor imputation,
+
+
+Multiple Imputation by Chained Equations (MICE), and
+
+
+missForest, a random‑forest–based nonparametric methodjbds.isdsa.org+8ResearchGate+8PubMed+8ResearchGate+1SCIRP+1PyMC+1Bayes Pharma+1ResearchGate+2BioMed Central+2BMJ Open+2.
+
+
+
+
+Primary findingAcross two large clinical cohorts (cirrhosis and inflammatory bowel disease), missForest consistently achieved the lowest imputation error and led to better preservation of predictive model performance (logistic regression and random forest) compared to the other methods ResearchGate.
+
+
+Missingness assumptionThe authors explicitly assume MCAR—they simulate missingness by randomly removing observed values, such that the missingness mechanism is independent of both observed and unobserved data. The study does not assess MAR or MNAR scenarios ResearchGate+13ResearchGate+13PyMC+13.
+
+
+Impact on predictive modelingThey evaluated downstream effects on clinical prediction using logistic and random forest models: missForest led to the smallest decline in predictive accuracy, suggesting better retention of signal in imputed datasets BMJ Open+2ResearchGate+2BioMed Central+2.
+
+
+Limitations / Gaps
+
+
+Only MCAR was evaluated—not realistic for many clinical datasets where missingness may depend on patient characteristics (MAR or MNAR).
+
+
+The study is limited to lab values and specific disease cohorts—it’s unclear how missForest fares in broader data types or missingness mechanisms.
+
+
+No sensitivity analysis for departures from MCAR was performed.
+
+
+Computational demands of missForest are higher than simpler methods, which isn't addressed.
+
+
+
+
+Under idealized MCAR scenarios, missForest significantly outperforms other popular imputation methods both in error rates and in preserving predictive accuracy. However, its utility in typical clinical datasets—where missingness is often MAR or MNAR—is untested here. The reliance on MCAR makes it less applicable in real-world settings without further validation under non-random missingness assumptions.
+},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/6B9F7CJP/Waljee et al. - 2013 - Comparison of imputation methods for missing laboratory data in medicine.pdf:application/pdf},
+}
+
+@article{seaman_what_2013,
+	title = {What {Is} {Meant} by "{Missing} at {Random}"?},
+	volume = {28},
+	issn = {0883-4237},
+	url = {http://arxiv.org/abs/1306.2812},
+	doi = {10.1214/13-STS415},
+	abstract = {The concept of missing at random is central in the literature on statistical analysis with missing data. In general, inference using incomplete data should be based not only on observed data values but should also take account of the pattern of missing values. However, it is often said that if data are missing at random, valid inference using likelihood approaches (including Bayesian) can be obtained ignoring the missingness mechanism. Unfortunately, the term "missing at random" has been used inconsistently and not always clearly; there has also been a lack of clarity around the meaning of "valid inference using likelihood". These issues have created potential for confusion about the exact conditions under which the missingness mechanism can be ignored, and perhaps fed confusion around the meaning of "analysis ignoring the missingness mechanism". Here we provide standardised precise definitions of "missing at random" and "missing completely at random", in order to promote unification of the theory. Using these definitions we clarify the conditions that suffice for "valid inference" to be obtained under a variety of inferential paradigms.},
+	number = {2},
+	urldate = {2025-08-02},
+	journal = {Statistical Science},
+	author = {Seaman, Shaun and Galati, John and Jackson, Dan and Carlin, John},
+	month = may,
+	year = {2013},
+	note = {arXiv:1306.2812 [stat]},
+	keywords = {Statistics - Methodology},
+	annote = {Key Points
+
+
+Clarifies precise definitionsThe paper provides unambiguous, standardized definitions for both Missing at Random (MAR) and Missing Completely at Random (MCAR), pointing out and resolving inconsistencies in their previous usage across the literature arXivarXiv+1ResearchGate+1.
+
+
+Distinguishes frameworks of inferenceIt carefully differentiates between conditions under which the missingness mechanism can be ignored:
+
+
+Likelihood/Bayesian inference often requires a weaker MAR condition ("realized MAR").
+
+
+Frequentist direct-likelihood inference may require a stronger ("distributional") MAR arXivarXiv+8arXiv+8ResearchGate+8.
+
+
+
+
+Explains ignorability properlyThe article clarifies the formal relation between MAR and ignorability, showing exactly when ignoring the missingness process does not bias inference under various paradigms (Bayesian, frequentist, likelihood) arXiv+1ResearchGate+1.
+
+
+Highlights misinterpretations in practiceIt notes that the term “MAR” has been used inconsistently—sometimes about realized data patterns, sometimes about all possible patterns—leading to misunderstandings about when one can validly ignore the missing data mechanism arXiv+6juliejosse.com+6arXiv+6arXiv+3arXiv+3ResearchGate+3.
+
+
+Limits and implicationsThe paper is theoretical in nature, without simulations or empirical studies. It offers improved clarity and foundational definitions rather than new estimation methods, and focuses on identifiability and validity conditions rather than imputation techniques arXiv+1arXiv+1
+
+
+
+This paper is foundational for anyone working with missing data—it sharpens your understanding of what MAR really means and underpins when it's valid to ignore the missing data mechanism in different inferential settings. However, it’s conceptual, not empirical, and doesn’t engage with estimation or imputation procedures.
+},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/VH429GXN/Seaman et al. - 2013 - What Is Meant by Missing at Random.pdf:application/pdf;Snapshot:/Users/oliviawilliamson/Zotero/storage/J3BGE6S4/1306.html:text/html},
+}
+
+@misc{noauthor_multiple_nodate,
+	title = {Multiple {Imputation}: {A} {Review} of {Practical} and {Theoretical} {Findings}},
+	shorttitle = {Multiple {Imputation}},
+	url = {https://www.researchgate.net/publication/322498526_Multiple_Imputation_A_Review_of_Practical_and_Theoretical_Findings},
+	abstract = {Access 135+ million publications and connect with 20+ million researchers. Join for free and gain visibility by uploading your research.},
+	language = {en},
+	urldate = {2025-08-02},
+	journal = {ResearchGate},
+	file = {Snapshot:/Users/oliviawilliamson/Zotero/storage/S6WIYTTW/322498526_Multiple_Imputation_A_Review_of_Practical_and_Theoretical_Findings.html:text/html},
+}
+
+@article{austin_missing_2021,
+	title = {Missing {Data} in {Clinical} {Research}: {A} {Tutorial} on {Multiple} {Imputation}},
+	volume = {37},
+	issn = {0828-282X},
+	shorttitle = {Missing {Data} in {Clinical} {Research}},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8499698/},
+	doi = {10.1016/j.cjca.2020.11.010},
+	abstract = {Missing data is a common occurrence in clinical research. Missing data occurs when the value of the variables of interest are not measured or recorded for all subjects in the sample. Common approaches to addressing the presence of missing data include complete-case analyses, where subjects with missing data are excluded, and mean-value imputation, where missing values are replaced with the mean value of that variable in those subjects for whom it is not missing. However, in many settings, these approaches can lead to biased estimates of statistics (eg, of regression coefficients) and/or confidence intervals that are artificially narrow. Multiple imputation (MI) is a popular approach for addressing the presence of missing data. With MI, multiple plausible values of a given variable are imputed or filled in for each subject who has missing data for that variable. This results in the creation of multiple completed data sets. Identical statistical analyses are conducted in each of these complete data sets and the results are pooled across complete data sets. We provide an introduction to MI and discuss issues in its implementation, including developing the imputation model, how many imputed data sets to create, and addressing derived variables. We illustrate the application of MI through an analysis of data on patients hospitalised with heart failure. We focus on developing a model to estimate the probability of 1-year mortality in the presence of missing data. Statistical software code for conducting MI in R, SAS, and Stata are provided.},
+	number = {9},
+	urldate = {2025-08-02},
+	journal = {The Canadian Journal of Cardiology},
+	author = {Austin, Peter C. and White, Ian R. and Lee, Douglas S. and van Buuren, Stef},
+	month = sep,
+	year = {2021},
+	pmid = {33276049},
+	pmcid = {PMC8499698},
+	pages = {1322--1331},
+	annote = {Key Points
+
+
+Method proposed / evaluatedA comprehensive tutorial on Multiple Imputation (MI) is presented, including practical advice on constructing the imputation model, choosing the number of imputations, handling derived variables, and performing pooled analyses with standard software such as R, SAS, and Stata BioMed Central+5SCIRP+5BioMed Central+5PubMed.
+
+
+Missingness assumptions discussedClearly delineates the Rubin categories—MCAR, MAR, and MNAR—and explains how the validity of MI depends on assuming data are MAR (or MCAR); under MNAR, MI may produce biased results unless additional assumptions or sensitivity analyses are used Mailman School of Public Health+4community.amstat.org+4ScienceDirect+4BioMed Central+3BioMed Central+3Wikipedia+3.
+
+
+Important practical recommendations
+
+
+Include all analysis-model variables, including outcomes and predictors, in the imputation model.
+
+
+For derived variables (e.g. BMI, interactions), use strategies like “transform‑then‑impute” or “just‑another‑variable,” while being mindful of potential inconsistencies BioMed Central+2Wikipedia+2BioMed Central+2Editverse+7PMC+7Cross Validated+7.
+
+
+Consider the “Multiple Imputation then Deletion (MID)” strategy: impute outcomes for all subjects then exclude imputed outcomes during analysis to improve efficiency and robustness arXiv+10PMC+10PubMed+10.
+
+
+
+
+Limitations / gaps
+
+
+Focused on MAR scenarios; does not provide detailed guidance on handling MNAR or performing sensitivity analyses beyond the basic conceptual discussion.
+
+
+Tutorial format—no new empirical comparisons or evaluation of MI versus other advanced methods such as ML-based or GAN-based imputation.
+
+
+Limited attention to high-dimensional or complex data settings—largely centered on traditional clinical datasets and standard regression analyses.
+
+
+
+
+This tutorial serves as an accessible, comprehensive introduction to MI for clinical researchers. It emphasizes best-practice implementation under the MAR assumption, covering key modeling decisions and software usage. However, it does not extend into advanced imputation techniques, evaluation under real-world or non-ignorable missingness (MNAR), or high-dimensional computational settings.
+},
+	file = {Full Text:/Users/oliviawilliamson/Zotero/storage/9UBIWHIK/Austin et al. - 2021 - Missing Data in Clinical Research A Tutorial on Multiple Imputation.pdf:application/pdf},
+}
+
+@article{akande_empirical_2017,
+	title = {An {Empirical} {Comparison} of {Multiple} {Imputation} {Methods} for {Categorical} {Data}},
+	volume = {71},
+	issn = {0003-1305, 1537-2731},
+	url = {http://arxiv.org/abs/1508.05918},
+	doi = {10.1080/00031305.2016.1277158},
+	abstract = {Multiple imputation is a common approach for dealing with missing values in statistical databases. The imputer ﬁlls in missing values with draws from predictive models estimated from the observed data, resulting in multiple, completed versions of the database. Researchers have developed a variety of default routines to implement multiple imputation; however, there has been limited research comparing the performance of these methods, particularly for categorical data. We use simulation studies to compare repeated sampling properties of three default multiple imputation methods for categorical data, including chained equations using generalized linear models, chained equations using classiﬁcation and regression trees, and a fully Bayesian joint distribution based on Dirichlet Process mixture models. We base the simulations on categorical data from the American Community Survey. In the circumstances of this study, the results suggest that default chained equations approaches based on generalized linear models ˚Olanrewaju Akande is PhD student, Department of Statistical Science, Duke University, Durham, NC 27708 (Email: olanrewaju.akande@duke.edu); Fan Li is Associate Professor, Department of Statistical Science, Duke University, NC 27708 (E-mail: ﬂi@stat.duke.edu); and Jerome P. Reiter is Professor of Statistical Science, Duke University, Durham, NC 27708 (E-mail: jerry@stat.duke.edu). This research was supported by grants from the National Science Foundation (SES-11-31897) and the Alfred P. Sloan Foundation (G-2015-20166003).},
+	language = {en},
+	number = {2},
+	urldate = {2025-08-02},
+	journal = {The American Statistician},
+	author = {Akande, Olanrewaju and Li, Fan and Reiter, Jerome},
+	month = apr,
+	year = {2017},
+	note = {arXiv:1508.05918 [stat]},
+	keywords = {Statistics - Methodology, Statistics - Computation},
+	pages = {162--170},
+	file = {PDF:/Users/oliviawilliamson/Zotero/storage/VDMLJMPM/Akande et al. - 2017 - An Empirical Comparison of Multiple Imputation Methods for Categorical Data.pdf:application/pdf},
+}
+
+@article{kopra_bayesian_2018,
+	title = {Bayesian models for data missing not at random in health examination surveys},
+	volume = {18},
+	issn = {1471-082X},
+	url = {https://doi.org/10.1177/1471082X17722605},
+	doi = {10.1177/1471082X17722605},
+	abstract = {In epidemiological surveys, data missing not at random (MNAR) due to survey nonresponse may potentially lead to a bias in the risk factor estimates. We propose an approach based on Bayesian data augmentation and survival modelling to reduce the nonresponse bias. The approach requires additional information based on follow-up data. We present a case study of smoking prevalence using FINRISK data collected between 1972 and 2007 with a follow-up to the end of 2012 and compare it to other commonly applied missing at random (MAR) imputation approaches. A simulation experiment is carried out to study the validity of the approaches. Our approach appears to reduce the nonresponse bias substantially, whereas MAR imputation was not successful in bias reduction.},
+	language = {EN},
+	number = {2},
+	urldate = {2025-08-02},
+	journal = {Statistical Modelling},
+	author = {Kopra, Juho and Karvanen, Juha and Härkänen, Tommi},
+	month = apr,
+	year = {2018},
+	note = {Publisher: SAGE Publications India},
+	pages = {113--128},
+	annote = {Key Points
+
+
+Proposed methodA Bayesian data‑augmentation model paired with a survival model is developed to correct for nonresponse bias in epidemiological surveys, particularly when missingness is Missing Not At Random (MNAR). It leverages additional follow-up data (e.g., mortality, disease outcomes) to inform the likelihood of survey participationjuhokopra.fi+5ResearchGate+5Grafiati+5.
+
+
+Missingness assumptions madeThe approach assumes a MNAR mechanism where nonresponse is related to unobserved variables (e.g., health status). Informative follow-up observations help identify the missingness mechanism. The model contrasts with standard MAR imputation approaches, which are assumed inadequate under MNAR scenarios Grafiati.
+
+
+Demonstrated evaluationThe method is applied to smoking prevalence using Finnish FINRISK data (1972–2007, with follow-up to end‑2012), and is assessed via simulation experiments. It substantially reduces bias compared to MAR imputation techniquesjuhokopra.fi+3ResearchGate+3Grafiati+3.
+
+
+Limitations / gaps
+
+
+Requires rich follow-up data (e.g. survival/mortality records), which may not be widely available.
+
+
+May depend on correct specification of the survival and participation models—mis-specification could introduce bias.
+
+
+Limited generalizability: demonstrated only in smoking prevalence context, primarily in FINRISK data—other exposures or populations may behave differently.
+
+
+
+
+This paper presents a compelling Bayesian framework that mitigates nonresponse bias from MNAR missingness in health surveys by exploiting follow-up survival data. It improves estimation in a smoking prevalence example, outperforming MAR-based imputation. However, the approach hinges on the availability and accurate modeling of external outcome data, and may not easily generalize beyond its specific context.
+},
+	file = {SAGE PDF Full Text:/Users/oliviawilliamson/Zotero/storage/G672WAQ2/Kopra et al. - 2018 - Bayesian models for data missing not at random in health examination surveys.pdf:application/pdf},
+}
+
+@article{du_bayesian_2022,
+	title = {A {Bayesian} {Latent} {Variable} {Selection} {Model} for {Nonignorable} {Missingness}},
+	volume = {57},
+	issn = {0027-3171},
+	url = {https://doi.org/10.1080/00273171.2021.1874259},
+	doi = {10.1080/00273171.2021.1874259},
+	abstract = {Missing data are exceedingly common across a variety of disciplines, such as educational, social, and behavioral science areas. Missing not at random (MNAR) mechanism where missingness is related to unobserved data is widespread in real data and has detrimental consequence. However, the existing MNAR-based methods have potential problems such as leaving the data incomplete and failing to accommodate incomplete covariates with interactions, non-linear terms, and random slopes. We propose a Bayesian latent variable imputation approach to impute missing data due to MNAR (and other missingness mechanisms) and estimate the model of substantive interest simultaneously. In addition, even when the incomplete covariates involves interactions, non-linear terms, and random slopes, the proposed method can handle missingness appropriately. Computer simulation results suggested that the proposed Bayesian latent variable selection model (BLVSM) was quite effective when the outcome and/or covariates were MNAR. Except when the sample size was small, estimates from the proposed BLVSM tracked closely with those from the complete data analysis. With a small sample size, when the outcome was less predictable from the covariates, the missingness proportions of the covariates and the outcome were larger, and the missingness selection processes of the covariates and the outcome were more MNAR and MAR, the performance of BLVSM was less satisfactory. When the sample size was large, BLVSM always performed well. In contrast, the method with an MAR assumption provided biased estimates and undercoverage confidence intervals when the missingness was MNAR. The robustness and the implementation of BLVSM in real data were also illustrated. The proposed method is available in the Blimp software application, and the paper includes a data analysis example illustrating its use.},
+	number = {2-3},
+	urldate = {2025-08-02},
+	journal = {Multivariate Behavioral Research},
+	author = {Du, Han and Enders, Craig and Keller, Brian Tinnell and Bradbury, Thomas N. and Karney, Benjamin R.},
+	month = jun,
+	year = {2022},
+	pmid = {33529056},
+	note = {Publisher: Routledge
+\_eprint: https://doi.org/10.1080/00273171.2021.1874259},
+	keywords = {Bayesian statistics, Missing not at random, multiple imputation},
+	pages = {478--512},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/WAF7XEZM/Du et al. - 2022 - A Bayesian Latent Variable Selection Model for Nonignorable Missingness.pdf:application/pdf},
+}
+
+@article{linero_bayesian_2018,
+	title = {Bayesian {Approaches} for {Missing} {Not} at {Random} {Outcome} {Data}: {The} {Role} of {Identifying} {Restrictions}},
+	volume = {33},
+	issn = {0883-4237},
+	shorttitle = {Bayesian {Approaches} for {Missing} {Not} at {Random} {Outcome} {Data}},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6936760/},
+	doi = {10.1214/17-STS630},
+	abstract = {Missing data is almost always present in real datasets, and introduces several statistical issues. One fundamental issue is that, in the absence of strong uncheckable assumptions, effects of interest are typically not nonparametrically identified. In this article, we review the generic approach of the use of identifying restrictions from a likelihood-based perspective, and provide points of contact for several recently proposed methods. An emphasis of this review is on restrictions for nonmonotone missingness, a subject that has been treated sparingly in the literature. We also present a general, fully-Bayesian, approach which is widely applicable and capable of handling a variety of identifying restrictions in a uniform manner.},
+	number = {2},
+	urldate = {2025-08-02},
+	journal = {Statistical science : a review journal of the Institute of Mathematical Statistics},
+	author = {Linero, Antonio R. and Daniels, Michael J.},
+	month = may,
+	year = {2018},
+	pmid = {31889740},
+	pmcid = {PMC6936760},
+	pages = {198--213},
+	annote = {Key Points
+This paper serves as a theoretical and methodological review advocating for Bayesian models that explicitly address non‑ignorable missingness using identifying restrictions and prior elicitation when data alone can’t identify the model. It clarifies that without such assumptions, MNAR models remain unidentifiable—and underscores the necessity of sensitivity analysis. However, the work stays theoretical: it doesn’t include simulations, real-data examples, or implementation details.
+
+
+Method proposed/evaluatedA fully Bayesian framework is developed that handles non‑ignorable (MNAR) missing outcome data by introducing identifying restrictions (e.g. pattern‐mixture assumptions or sensitivity parameters) to make the extrapolation distribution estimable. It unifies various MNAR modeling strategies and allows encoding expert belief via priors when non‑identifiability arises iriseekhout.com+9PMC+9PubMed+9BioMed Central+3rianneschouten.github.io+3YouTube+3.
+
+
+Missingness assumptions madeThe paper explicitly addresses always‑non‑ignorable (MNAR) mechanisms, contrasting them with ignorability under MAR/MCAR. The approach allows specification of a sensitivity parameter (ξ) that quantifies departures from MAR, with uncertainty encoded via prior distributions on ξ or via mixture modeling rianneschouten.github.io+1BioMed Central+1.
+
+
+Limitations / gaps
+
+
+Identifiability constraints: Without strong assumptions, the missing data distribution remains nonparametrically unidentifiable—relying on identifying restrictions or strong parametric structure.
+
+
+Dependence on priors/expert input: The Bayesian approach requires careful elicitation of priors for non‑identifiable parameters—susceptible to subjective bias.
+
+
+Limited focus on implementation: While the framework is general, discussion of practical model fitting or software implementation is minimal.
+
+
+No real‑data application or simulation: The paper is largely conceptual and methodological, with little demonstration on real or simulated datasets compared to other MI/MNAR strategies
+
+
+
+
+},
+	file = {Full Text:/Users/oliviawilliamson/Zotero/storage/5QIF5D5Z/Linero and Daniels - 2018 - Bayesian Approaches for Missing Not at Random Outcome Data The Role of Identifying Restrictions.pdf:application/pdf},
+}
+
+@article{hippel_regression_2007,
+	title = {Regression with missing {Ys}: {An} improved strategy for analyzing multiply imputed data},
+	volume = {37},
+	issn = {0081-1750, 1467-9531},
+	shorttitle = {Regression with missing {Ys}},
+	url = {http://arxiv.org/abs/1605.01095},
+	doi = {10.1111/j.1467-9531.2007.00180.x},
+	abstract = {When fitting a generalized linear model -- such as a linear regression, a logistic regression, or a hierarchical linear model -- analysts often wonder how to handle missing values of the dependent variable Y. If missing values have been filled in using multiple imputation, the usual advice is to use the imputed Y values in analysis. We show, however, that using imputed Ys can add needless noise to the estimates. Better estimates can usually be obtained using a modified strategy that we call multiple imputation, then deletion (MID). Under MID, all cases are used for imputation, but following imputation cases with imputed Y values are excluded from the analysis. When there is something wrong with the imputed Y values, MID protects the estimates from the problematic imputations. And when the imputed Y values are acceptable, MID usually offers somewhat more efficient estimates than an ordinary MI strategy.},
+	number = {1},
+	urldate = {2025-08-02},
+	journal = {Sociological Methodology},
+	author = {Hippel, Paul T. von},
+	month = aug,
+	year = {2007},
+	note = {arXiv:1605.01095 [stat]},
+	keywords = {Statistics - Methodology},
+	pages = {83--117},
+	annote = {Key Points
+
+
+Method proposedIntroduces the MID (Multiple Imputation, then Deletion) strategy: impute both predictors and missing outcomes (Y), then exclude cases with imputed Y from the regression analysis. This is in contrast to the conventional strategy of using imputed Y values directly in the modeling step ResearchGate+4arXiv+4LBJ School of Public Affairs+4.
+
+
+Why this method?Using imputed outcomes can introduce unnecessary noise or bias—especially when the imputation model for Y is imperfect. By omitting imputed Ys, MID reduces variability while retaining all observed Ys and leveraging all cases during imputation for improved parameter estimation arXivScinito.
+
+
+Missingness assumptionsApplies to regression analysis when the outcome Y has missingness—presumably under MAR (or MCAR) and assuming the imputation method correctly handles relationships between predictors and outcome. MID helps when missingness in Y is conditionally ignorable but the imputation model isn't perfect.
+
+
+Benefits demonstratedAcross simulations and analytic arguments, MID typically yields more efficient estimates (lower variance) than full MI (including imputed Ys), while avoiding bias if imputed Y values are poorly estimated arXiv+1Scinito+1.
+
+
+Limitations / gaps
+
+
+MID is only applicable when the response variable Y is imputed—doesn’t address missingness in predictors.
+
+
+If the missingness in Y is MNAR, excluding imputed Ys may still lead to bias (unless MNAR is properly modeled).
+
+
+The method assumes a correctly specified imputation model for X and Y relationships—for mis‑specification or extreme circumstances, its advantages may not hold.
+
+
+
+
+
+MID is a practical refinement to multiple imputation for regression settings where the outcome variable Y has missing data. Rather than using imputed outcome values (which may add noise), MID imputes all data and then removes cases with imputed outcomes before fitting the model—yielding more efficient and potentially more reliable estimates under typical MAR scenarios. That said, MID does not address missing predictors or MNAR mechanisms, and relies on correctly specified imputation models.
+},
+	file = {Preprint PDF:/Users/oliviawilliamson/Zotero/storage/P4AMEEJN/Hippel - 2007 - Regression with missing Ys An improved strategy for analyzing multiply imputed data.pdf:application/pdf;Snapshot:/Users/oliviawilliamson/Zotero/storage/HGAMM8DK/1605.html:text/html},
+}
+
+@article{li_comparison_2024,
+	title = {Comparison of the effects of imputation methods for missing data in predictive modelling of cohort study datasets},
+	volume = {24},
+	issn = {1471-2288},
+	url = {https://doi.org/10.1186/s12874-024-02173-x},
+	doi = {10.1186/s12874-024-02173-x},
+	abstract = {Missing data is frequently an inevitable issue in cohort studies and it can adversely affect the study's findings. We assess the effectiveness of eight frequently utilized statistical and machine learning (ML) imputation methods for dealing with missing data in predictive modelling of cohort study datasets. This evaluation is based on real data and predictive models for cardiovascular disease (CVD) risk.},
+	number = {1},
+	urldate = {2025-08-02},
+	journal = {BMC Medical Research Methodology},
+	author = {Li, JiaHang and Guo, ShuXia and Ma, RuLin and He, Jia and Zhang, XiangHui and Rui, DongSheng and Ding, YuSong and Li, Yu and Jian, LeYao and Cheng, Jing and Guo, Heng},
+	month = feb,
+	year = {2024},
+	keywords = {Machine learning, Cardiovascular disease, Cohort study, Imputation methods, Missing data},
+	pages = {41},
+	annote = {Key Points
+
+
+Methods evaluated:The authors compared eight imputation approaches—Simple (mean substitution), Regression, Expectation-Maximization (EM), Multiple Imputation by Chained Equations (MICE), K‑Nearest Neighbors (KNN), Clustering-based imputation, Random Forest (RF), and Decision Tree (Cart)—applied to cohort data with simulated 20\% missingnessMedRxiv+9PubMed+9ResearchGate+9.
+
+
+Missingness assumptions:Missingness was simulated under a missing‑at‑random (MAR) or MCAR scenario, i.e. missing values were injected randomly (not depending on unobserved data). There was no modeling of MNAR mechanisms arXiv.
+
+
+Evaluation framework:Performance of imputation was assessed using Mean Absolute Error (MAE), Root Mean Square Error (RMSE), and downstream predictive accuracy via a support vector machine risk model for cardiovascular disease, measured by AUCarXiv+15PubMed+15ResearchGate+15.
+
+
+Top-performing methods:KNN and RF outperformed other techniques—with KNN showing lowest MAE ({\textasciitilde}0.2032) and RMSE ({\textasciitilde}0.7438), and RF delivering AUC ≈ 0.777 (95\% CI 0.769–0.785). EM, Cart, and MICE followed, while Simple, Regression, and Cluster lagged behind significantly arXiv+11PubMed+11ResearchGate+11.
+
+
+Limitations / gaps:
+
+
+Only random missingness was simulated—not reflecting real-world MAR or MNAR patterns.
+
+
+Single dataset context (Xinjiang cohort, CVD risk)—limited generalizability to other domains or complex missing-data structures.
+
+
+No exploration of sensitivity or robustness when the missingness mechanism deviates from MCAR/MAR.
+
+
+Computational cost and implementation considerations (especially for RF and KNN) were not addressed.
+
+
+
+
+In a simulated 20\% random-missing setting using real cohort data, KNN and Random Forest imputation performed best, both in terms of error metrics and downstream predictive accuracy for cardiovascular risk. However, the study does not investigate or accommodate MAR or MNAR mechanisms, which limits applicability in real-world epidemiological datasets where missingness often depends on observed or unobserved characteristics.
+},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/BVZIYZ4F/Li et al. - 2024 - Comparison of the effects of imputation methods for missing data in predictive modelling of cohort s.pdf:application/pdf;Snapshot:/Users/oliviawilliamson/Zotero/storage/KUTLZEQ9/s12874-024-02173-x.html:text/html},
+}
+
+@article{ren_review_2023,
+	title = {A review on missing values for main challenges and methods},
+	volume = {119},
+	issn = {0306-4379},
+	url = {https://www.sciencedirect.com/science/article/pii/S0306437923001047},
+	doi = {10.1016/j.is.2023.102268},
+	abstract = {Several recent reviews summarize common missing value analysis methods. However, none of them provide a systematic and in-depth summary of the analytical challenges and solutions for dealing with missing values. For the purpose of guiding the handling of missing values, this review aims to consolidate current developments in novel missing-value research methodologies. In particular, we comprehensively investigated cutting-edge missing value solutions and methodically studied the main challenges associated with missing values analysis (missing mechanisms, missing patterns, and missing rates). Furthermore, we reviewed 63 publications that compare different strategies for deleting and imputing missing values. Then we investigated data characteristics, highlighted three main problems when analyzing missing values, and analyzed the performance of missing value solutions in these studied papers. Moreover, we conducted comprehensive experiments on 9 public datasets using typical missing value processing methods and provided a simple guided decision tree for handling missing values. Finally, we described current Research hotspots and open challenges, which give potential research topics.},
+	urldate = {2025-08-02},
+	journal = {Information Systems},
+	author = {Ren, Lijuan and Wang, Tao and Sekhari Seklouli, Aicha and Zhang, Haiqing and Bouras, Abdelaziz},
+	month = oct,
+	year = {2023},
+	pages = {102268},
+	file = {Full Text:/Users/oliviawilliamson/Zotero/storage/9GJRGHBD/Ren et al. - 2023 - A review on missing values for main challenges and methods.pdf:application/pdf;ScienceDirect Snapshot:/Users/oliviawilliamson/Zotero/storage/3FVSL74R/S0306437923001047.html:text/html},
+}
+
+@article{sterne_multiple_2009,
+	title = {Multiple imputation for missing data in epidemiological and clinical research: potential and pitfalls},
+	volume = {338},
+	issn = {0959-8138},
+	shorttitle = {Multiple imputation for missing data in epidemiological and clinical research},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2714692/},
+	doi = {10.1136/bmj.b2393},
+	abstract = {Most studies have some missing data. Jonathan Sterne and colleagues describe the appropriate use and reporting of the multiple imputation approach to dealing with them},
+	urldate = {2025-08-02},
+	journal = {The BMJ},
+	author = {Sterne, Jonathan A C and White, Ian R and Carlin, John B and Spratt, Michael and Royston, Patrick and Kenward, Michael G and Wood, Angela M and Carpenter, James R},
+	month = jun,
+	year = {2009},
+	pmid = {19564179},
+	pmcid = {PMC2714692},
+	pages = {b2393},
+	annote = {Key Points
+
+
+Topic \& PurposeThis is a practical review and guidance article aimed at epidemiologists and clinical researchers, covering the principles, benefits, and proper application of multiple imputation (MI) for handling missing data in medical studies.
+
+
+Methods discussedExplains the rationale for using multiple imputation, which involves creating multiple completed datasets, analyzing each separately, and combining results to account for missing-data uncertainty. Also contrasts MI with simpler approaches like complete-case analysis or single imputation, emphasizing MI’s flexibility and reduced bias PMC.
+
+
+Missingness assumptions madeThe method relies principally on the Missing At Random (MAR) assumption—i.e. after conditioning on observed variables, missingness does not depend on unobserved values. The article also addresses MCAR, noting that MI remains valid in MCAR settings, but highlights that MI can produce biased estimates when data are MNAR unless additional sensitivity analyses or assumptions are introduced BioMed Central+1SpringerOpen+1Journal of Machine Learning Research+2SpringerOpen+2SpringerOpen+2.
+
+
+Practical guidance \& best practicesOffers recommendations on constructing imputation models (e.g. including all relevant predictors and outcomes), selecting the number of imputations, dealing with different variable types, and appropriate reporting of MI analyses, encouraging transparency and reproducibility PMC.
+
+
+Limitations / Gaps
+
+
+No empirical comparison: The article is conceptual and methodological—does not include simulation studies or real-data performance comparisons of MI versus other methods.
+
+
+Limited treatment of MNAR: While acknowledging MNAR issues, the paper provides minimal guidance on conducting robust sensitivity analyses or alternative approaches in those cases.
+
+
+Not tailored to high-dimensional or ML contexts: The advice centers on classical regression/clinical settings; modern machine learning–based imputation or complex data structures are not explored.
+
+
+
+
+
+This paper serves as a foundational, accessible resource on how to properly implement multiple imputation in clinical and epidemiological research, emphasizing the importance of the MAR assumption and careful modeling choices. While it promotes sound practice, it doesn't provide empirical evaluation or tools for handling MNAR or modern high-dimensional applications.
+},
+}
+
+@misc{noauthor_are_nodate,
+	title = {Are missing outcome data adequately handled? {A} review of published randomized controlled trials in major medical journals},
+	shorttitle = {Are missing outcome data adequately handled?},
+	url = {https://journals.sagepub.com/doi/epdf/10.1191/1740774504cn032oa},
+	language = {en},
+	urldate = {2025-08-02},
+	doi = {10.1191/1740774504cn032oa},
+	annote = {Key Points
+
+
+Study focus \& designThe authors reviewed 71 randomized controlled trials published in BMJ, JAMA, Lancet, and NEJM (July–December 2001), excluding those with time-to-event outcomes, to evaluate how missing outcome data were reported and handled in practice PubMed.
+
+
+Methods used for missing outcome dataAmong trials with missing outcomes (89\%), the majority relied on complete-case analysis:
+
+
+Trials with single-time point outcomes: {\textasciitilde}92\% used complete-case, {\textasciitilde}8\% used simple imputation (baseline or worst-case).
+
+
+Trials with repeated measures: 46\% used complete-case, 19\% used last‑observation‑carried‑forward (LOCF), 11\% used worst‑case imputation, 2\% used regression-based imputation. Only 14\% used repeated‑measures modelsarXiv+4PubMed+4arXiv+4.
+
+
+
+
+Handling of assumptions and sensitivityOnly 21\% of trials with missing outcome data reported any sensitivity analysis—most did not acknowledge assumptions about the missingness mechanism or perform robustness checks PubMed.
+
+
+Missingness assumptions implicitly madeTrials predominantly assumed MCAR—that data were missing completely at random—implicitly justifying complete-case analyses. More problematic mechanisms like MAR or MNAR were generally unacknowledged or unexamined.
+
+
+Limitations identified
+
+
+Overreliance on naïve approaches like listwise deletion and LOCF.
+
+
+Minimal use of regression-based or model-based methods.
+
+
+Very limited use of sensitivity analysis to assess potential bias from nonrandom missingness.
+
+
+Need for clearer reporting of missing data assumptions and proper handling strategies.
+
+
+
+
+Despite widespread awareness of the challenges posed by missing outcome data, this 2004 review found that most RCTs in top-tier medical journals relied on suboptimal methods like complete-case analysis or LOCF, rarely performed sensitivity analyses, and infrequently engaged with deeper missingness assumptions (e.g. MAR or MNAR). The authors emphasize the importance of explicitly stating assumptions and using more robust handling strategies.
+
+},
+	file = {Snapshot:/Users/oliviawilliamson/Zotero/storage/G64S6TL8/1740774504cn032oa.html:text/html},
+}
+
+@article{molenberghs_missing_nodate,
+	title = {Missing {Data} in {Clinical} {Studies}},
+	language = {en},
+	author = {Molenberghs, Geert and Kenward, Michael G},
+	file = {PDF:/Users/oliviawilliamson/Zotero/storage/SIJDQ5I2/Molenberghs and Kenward - Missing Data in Clinical Studies.pdf:application/pdf},
+}
+
+@article{jakobsen_when_2017,
+	title = {When and how should multiple imputation be used for handling missing data in randomised clinical trials – a practical guide with flowcharts},
+	volume = {17},
+	issn = {1471-2288},
+	url = {https://doi.org/10.1186/s12874-017-0442-1},
+	doi = {10.1186/s12874-017-0442-1},
+	abstract = {Missing data may seriously compromise inferences from randomised clinical trials, especially if missing data are not handled appropriately. The potential bias due to missing data depends on the mechanism causing the data to be missing, and the analytical methods applied to amend the missingness. Therefore, the analysis of trial data with missing values requires careful planning and attention.},
+	number = {1},
+	urldate = {2025-08-02},
+	journal = {BMC Medical Research Methodology},
+	author = {Jakobsen, Janus Christian and Gluud, Christian and Wetterslev, Jørn and Winkel, Per},
+	month = dec,
+	year = {2017},
+	keywords = {Missing data, Multiple imputation, Randomised clinical trials},
+	pages = {162},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/Y5SGA3JI/Jakobsen et al. - 2017 - When and how should multiple imputation be used for handling missing data in randomised clinical tri.pdf:application/pdf;Snapshot:/Users/oliviawilliamson/Zotero/storage/WKJ4C795/s12874-017-0442-1.html:text/html},
+}
+
+@article{resche-rigon_multiple_2018,
+	title = {Multiple imputation by chained equations for systematically and sporadically missing multilevel data},
+	volume = {27},
+	issn = {0962-2802},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5496677/},
+	doi = {10.1177/0962280216666564},
+	abstract = {In multilevel settings such as individual participant data meta-analysis, a variable is ‘systematically missing’ if it is wholly missing in some clusters and ‘sporadically missing’ if it is partly missing in some clusters. Previously proposed methods to impute incomplete multilevel data handle either systematically or sporadically missing data, but frequently both patterns are observed. We describe a new multiple imputation by chained equations (MICE) algorithm for multilevel data with arbitrary patterns of systematically and sporadically missing variables. The algorithm is described for multilevel normal data but can easily be extended for other variable types. We first propose two methods for imputing a single incomplete variable: an extension of an existing method and a new two-stage method which conveniently allows for heteroscedastic data. We then discuss the difficulties of imputing missing values in several variables in multilevel data using MICE, and show that even the simplest joint multilevel model implies conditional models which involve cluster means and heteroscedasticity. However, a simulation study finds that the proposed methods can be successfully combined in a multilevel MICE procedure, even when cluster means are not included in the imputation models.},
+	number = {6},
+	urldate = {2025-08-02},
+	journal = {Statistical methods in medical research},
+	author = {Resche-Rigon, Matthieu and White, Ian R},
+	month = jun,
+	year = {2018},
+	pmid = {27647809},
+	pmcid = {PMC5496677},
+	pages = {1634--1649},
+	file = {Accepted Version:/Users/oliviawilliamson/Zotero/storage/7BXJBBDS/Resche-Rigon and White - 2018 - Multiple imputation by chained equations for systematically and sporadically missing multilevel data.pdf:application/pdf},
+}
+
+@article{zhang_missing_2016,
+	title = {Missing data imputation: focusing on single imputation},
+	volume = {4},
+	issn = {2305-5847, 2305-5839},
+	shorttitle = {Missing data imputation},
+	url = {https://atm.amegroups.org/article/view/8839},
+	doi = {10.3978/j.issn.2305-5839.2015.12.38},
+	abstract = {Missing data imputation: focusing on single imputation},
+	language = {en},
+	number = {1},
+	urldate = {2025-08-02},
+	journal = {Annals of Translational Medicine},
+	author = {Zhang, Zhongheng},
+	month = jan,
+	year = {2016},
+	note = {Number: 1
+Publisher: AME Publishing Company},
+	pages = {9--9},
+	annote = {Key Points
+
+
+Methods discussedCovers basic single imputation methods in R, including mean/median/mode substitution and simple regression-based imputation approaches. It explains how to implement these using R scripts without delving into complex mathematicsAnnals of Translational Medicine.
+
+
+Missingness assumptionsOperates under the assumption that data are MCAR or possibly MAR in simple forms. The article emphasizes that complete case deletion or naive single imputation may only be valid when missingness is random and proportions are not too large arXiv+15Annals of Translational Medicine+15ASA Community+15.
+
+
+Limitations \& biases highlighted
+
+
+These methods underestimate variability, ignore relationships between variables, and can bias summary statistics.
+
+
+Particularly problematic for longitudinal data: single imputation cannot account for time trends or imputation uncertainty Annals of Translational Medicine+3Annals of Translational Medicine+3Annals of Translational Medicine+3Annals of Translational Medicine.
+
+
+
+
+For longitudinal data scenariosThe article demonstrates longitudinal-specific single imputation methods (e.g., LOCF, cross-subject mean imputation), showing how trajectories can be imputed—but again limitations around bias and reduced variance are emphasizedarXiv+15Annals of Translational Medicine+15Annals of Translational Medicine+15.
+
+
+Educational aimDesigned as a tutorial for clinicians and researchers, the article focuses on ease-of-use and coding rather than on advanced or state-of-the-art imputation methods. It serves as a primer rather than a comprehensive or robust methodology guide
+
+
+This article serves as an introductory guide for basic single imputation techniques in clinical research settings. While useful for demonstrating foundational R code and approaches, it carries significant limitations: assumes data are MCAR, underestimates uncertainty, and often biases results, especially in longitudinal data contexts. It's a stepping stone—but needs to be followed by more robust approaches like multiple imputation (MI), regression-based or machine learning–based imputation methods.
+},
+}
+
+@article{el_badisy_multi-metric_2024,
+	title = {Multi-metric comparison of machine learning imputation methods with application to breast cancer survival},
+	volume = {24},
+	issn = {1471-2288},
+	url = {https://doi.org/10.1186/s12874-024-02305-3},
+	doi = {10.1186/s12874-024-02305-3},
+	abstract = {Handling missing data in clinical prognostic studies is an essential yet challenging task. This study aimed to provide a comprehensive assessment of the effectiveness and reliability of different machine learning (ML) imputation methods across various analytical perspectives. Specifically, it focused on three distinct classes of performance metrics used to evaluate ML imputation methods: post-imputation bias of regression estimates, post-imputation predictive accuracy, and substantive model-free metrics. As an illustration, we applied data from a real-world breast cancer survival study. This comprehensive approach aimed to provide a thorough assessment of the effectiveness and reliability of ML imputation methods across various analytical perspectives. A simulated dataset with 30\% Missing At Random (MAR) values was used. A number of single imputation (SI) methods - specifically KNN, missMDA, CART, missForest, missRanger, missCforest - and multiple imputation (MI) methods - specifically miceCART and miceRF - were evaluated. The performance metrics used were Gower’s distance, estimation bias, empirical standard error, coverage rate, length of confidence interval, predictive accuracy, proportion of falsely classified (PFC), normalized root mean squared error (NRMSE), AUC, and C-index scores. The analysis revealed that in terms of Gower’s distance, CART and missForest were the most accurate, while missMDA and CART excelled for binary covariates; missForest and miceCART were superior for continuous covariates. When assessing bias and accuracy in regression estimates, miceCART and miceRF exhibited the least bias. Overall, the various imputation methods demonstrated greater efficiency than complete-case analysis (CCA), with MICE methods providing optimal confidence interval coverage. In terms of predictive accuracy for Cox models, missMDA and missForest had superior AUC and C-index scores. Despite offering better predictive accuracy, the study found that SI methods introduced more bias into the regression coefficients compared to MI methods. This study underlines the importance of selecting appropriate imputation methods based on study goals and data types in time-to-event research. The varying effectiveness of methods across the different performance metrics studied highlights the value of using advanced machine learning algorithms within a multiple imputation framework to enhance research integrity and the robustness of findings.},
+	number = {1},
+	urldate = {2025-08-02},
+	journal = {BMC Medical Research Methodology},
+	author = {El Badisy, Imad and Graffeo, Nathalie and Khalis, Mohamed and Giorgi, Roch},
+	month = aug,
+	year = {2024},
+	keywords = {Machine learning, Imputation methods, Breast cancer survival, Performance metrics, Single and multiple imputation, Survival analysis},
+	pages = {191},
+	annote = {Key Points
+
+
+Methods evaluated / Proposed method:The study conducts a comparative evaluation of eight machine-learning-based imputation methods—including Random Forest–based (e.g., missForest), K‑Nearest Neighbors (KNN), CART, and missMDA—integrated within the MICE framework. These are compared alongside simpler single‑imputation (SI) methods. ResearchGate+1BioMed Central+1
+
+
+Missingness assumptions:While not explicitly modeling MAR or MNAR mechanisms, the evaluation reflects realistic medical prognostic settings (breast cancer survival). Imputation performance is assessed under assumed ignorable missingness (MAR/MCAR), typical for clinical data, though the study emphasizes bias introduced by SI under these mechanisms. BioMed Central
+
+
+Evaluation \& performance results:Performance metrics include AUC and C‑index for survival prediction, as well as bias in regression coefficients and imputation error. missMDA and missForest stood out by delivering superior predictive accuracy (higher AUC / C‑index) and lower bias, whereas SI methods increased bias significantly. BioMed Central
+
+
+Limitations / gaps:
+
+
+The study does not simulate or evaluate MNAR processes explicitly.
+
+
+The context is limited to a breast cancer survival dataset, so findings may not generalize to other disease domains or data types.
+
+
+The study is focused on prognosis/prediction rather than inference on causal effects or parameter estimation beyond prediction metrics.
+
+
+
+
+In the context of breast cancer survival prediction, machine learning–adaptive imputation methods (missMDA and missForest) outperform simpler approaches—including single imputation—in terms of both predictive accuracy and bias control. While the study offers strong evidence for selecting advanced methods in prognostic modeling, it stops short of exploring MNAR settings, diverse clinical contexts, or inferential objectives beyond prediction.
+
+},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/IMY5IT5F/El Badisy et al. - 2024 - Multi-metric comparison of machine learning imputation methods with application to breast cancer sur.pdf:application/pdf;Snapshot:/Users/oliviawilliamson/Zotero/storage/BNG22NR7/s12874-024-02305-3.html:text/html},
+}
+
+@misc{wang_are_2022,
+	title = {Are deep learning models superior for missing data imputation in large surveys? {Evidence} from an empirical comparison},
+	shorttitle = {Are deep learning models superior for missing data imputation in large surveys?},
+	url = {http://arxiv.org/abs/2103.09316},
+	doi = {10.48550/arXiv.2103.09316},
+	abstract = {Multiple imputation (MI) is a popular approach for dealing with missing data arising from non-response in sample surveys. Multiple imputation by chained equations (MICE) is one of the most widely used MI algorithms for multivariate data, but it lacks theoretical foundation and is computationally intensive. Recently, missing data imputation methods based on deep learning models have been developed with encouraging results in small studies. However, there has been limited research on evaluating their performance in realistic settings compared to MICE, particularly in big surveys. We conduct extensive simulation studies based on a subsample of the American Community Survey to compare the repeated sampling properties of four machine learning based MI methods: MICE with classification trees, MICE with random forests, generative adversarial imputation networks, and multiple imputation using denoising autoencoders. We find the deep learning imputation methods are superior to MICE in terms of computational time. However, with the default choice of hyperparameters in the common software packages, MICE with classification trees consistently outperforms, often by a large margin, the deep learning imputation methods in terms of bias, mean squared error, and coverage under a range of realistic settings.},
+	urldate = {2025-08-02},
+	publisher = {arXiv},
+	author = {Wang, Zhenhua and Akande, Olanrewaju and Poulos, Jason and Li, Fan},
+	month = mar,
+	year = {2022},
+	note = {arXiv:2103.09316 [cs]},
+	keywords = {Computer Science - Machine Learning, Statistics - Applications, Statistics - Machine Learning},
+	annote = {Key Points
+
+
+Method evaluatedThe study empirically compares deep learning–based imputation methods (like VAE-based, neural network approaches) with traditional Multiple Imputation by Chained Equations (MICE), using simulations based on real-world large-scale survey data to assess performance in practical missing-data settings ResearchGate+5arXiv+5OUCI+5.
+
+
+Missingness assumptionsThe evaluation assumes ignorable missingness (i.e., MCAR or MAR)—typical in survey nonresponse contexts—but does not implement principled MNAR modeling. Missingness is simulated under realistic survey mechanisms, although not explicitly formalized as MAR or MNAR arXiv.
+
+
+Evaluation \& resultsAcross extensive simulations mimicking large public surveys, the finding is that deep-learning imputation methods do not consistently outperform MICE, especially when survey missingness is moderate to complex. In some cases, deep methods underperform in bias reduction and variance compared to MICE SAGE Journals+10arXiv+10OUCI+10.
+
+
+Limitations / gaps
+
+
+The study does not explore MNAR missingness, limiting generalizability to non-ignorable contexts.
+
+
+Mostly focused on MICE vs deep methods; other modern ML-based imputation (e.g. missForest, GAIN) are not evaluated.
+
+
+Deep-learning approaches evaluated seem to struggle in large-sample, survey-style settings—suggesting limited scalability or model misspecification challenges.
+
+
+
+
+This paper provides a valuable empirical assessment in large survey data settings, showing that MICE remains highly competitive compared to current deep-learning imputation methods. Deep models rarely deliver superior accuracy, suggesting that more development is needed before they can reliably replace established imputation strategies in real-world survey research.
+},
+	file = {Preprint PDF:/Users/oliviawilliamson/Zotero/storage/9KMKDPCU/Wang et al. - 2022 - Are deep learning models superior for missing data imputation in large surveys Evidence from an emp.pdf:application/pdf;Snapshot:/Users/oliviawilliamson/Zotero/storage/EFEVE75C/2103.html:text/html},
+}
+
+@article{li_comparison_2024-1,
+	title = {Comparison of the effects of imputation methods for missing data in predictive modelling of cohort study datasets},
+	volume = {24},
+	issn = {1471-2288},
+	url = {https://doi.org/10.1186/s12874-024-02173-x},
+	doi = {10.1186/s12874-024-02173-x},
+	abstract = {Missing data is frequently an inevitable issue in cohort studies and it can adversely affect the study's findings. We assess the effectiveness of eight frequently utilized statistical and machine learning (ML) imputation methods for dealing with missing data in predictive modelling of cohort study datasets. This evaluation is based on real data and predictive models for cardiovascular disease (CVD) risk.},
+	number = {1},
+	urldate = {2025-08-02},
+	journal = {BMC Medical Research Methodology},
+	author = {Li, JiaHang and Guo, ShuXia and Ma, RuLin and He, Jia and Zhang, XiangHui and Rui, DongSheng and Ding, YuSong and Li, Yu and Jian, LeYao and Cheng, Jing and Guo, Heng},
+	month = feb,
+	year = {2024},
+	keywords = {Machine learning, Cardiovascular disease, Cohort study, Imputation methods, Missing data},
+	pages = {41},
+	annote = {Key Points
+
+
+Methods evaluatedThe study benchmarked eight widely used imputation techniques, covering simple and statistical methods (Mean, Regression, Expectation-Maximization (EM), MICE) and machine learning–based methods (K‑Nearest Neighbors (KNN), Clustering, Random Forest (RF), and CART) for predictive modeling in cohort data BioMed Central+1ResearchGate+1.
+
+
+Missingness assumptionsSimulated a 20\% missingness rate under an ignorable mechanism (assumed MCAR/MAR), consistent with typical cohort study scenarios. MNAR was not considered BioMed Central.
+
+
+Evaluation framework \& metricsCompared imputation methods using error metrics (MAE, RMSE) and downstream prediction performance (CVD risk model via SVM, evaluated by AUC). It also compared performance to complete-data benchmark modelsscanr.enseignementsup-recherche.gouv.fr+4BioMed Central+4ResearchGate+4.
+
+
+Performance highlights
+
+
+KNN and Random Forest (RF) delivered the lowest MAE/RMSE and highest predictive AUC (RF reached {\textasciitilde}0.777, vs. complete-data AUC 0.804).
+
+
+Conventional methods like EM, CART, and MICE performed moderately, while simple imputation, regression, and clustering were notably weaker arxiv.org+6BioMed Central+6ResearchGate+6.
+
+
+
+
+Limitations / gaps
+
+
+The study does not explore MNAR mechanisms.
+
+
+Limited to a single cohort dataset (10,164 subjects with 37 variables) in one geographic/clinical context.
+
+
+Focus is primarily prediction modeling, without assessment of bias in causal or regression parameter estimation beyond predictive AUC/RMSE metrics
+
+
+
+
+For predictive modeling in a real-world cardiovascular cohort with MCAR/MAR-level missingness, KNN and Random Forest imputation outperform simpler methods in both error reduction and model performance. However, findings are limited by the assumption of ignorable missingness, focus on one dataset, and lack of insights into causal inferences or MNAR robustness.
+},
+	file = {Full Text PDF:/Users/oliviawilliamson/Zotero/storage/D7QV7CTF/Li et al. - 2024 - Comparison of the effects of imputation methods for missing data in predictive modelling of cohort s.pdf:application/pdf;Snapshot:/Users/oliviawilliamson/Zotero/storage/RJVES87E/s12874-024-02173-x.html:text/html},
+}
+
+@article{shah_comparison_2014,
+	title = {Comparison of random forest and parametric imputation models for imputing missing data using {MICE}: a {CALIBER} study},
+	volume = {179},
+	issn = {1476-6256},
+	shorttitle = {Comparison of random forest and parametric imputation models for imputing missing data using {MICE}},
+	doi = {10.1093/aje/kwt312},
+	abstract = {Multivariate imputation by chained equations (MICE) is commonly used for imputing missing data in epidemiologic research. The "true" imputation model may contain nonlinearities which are not included in default imputation models. Random forest imputation is a machine learning technique which can accommodate nonlinearities and interactions and does not require a particular regression model to be specified. We compared parametric MICE with a random forest-based MICE algorithm in 2 simulation studies. The first study used 1,000 random samples of 2,000 persons drawn from the 10,128 stable angina patients in the CALIBER database (Cardiovascular Disease Research using Linked Bespoke Studies and Electronic Records; 2001-2010) with complete data on all covariates. Variables were artificially made "missing at random," and the bias and efficiency of parameter estimates obtained using different imputation methods were compared. Both MICE methods produced unbiased estimates of (log) hazard ratios, but random forest was more efficient and produced narrower confidence intervals. The second study used simulated data in which the partially observed variable depended on the fully observed variables in a nonlinear way. Parameter estimates were less biased using random forest MICE, and confidence interval coverage was better. This suggests that random forest imputation may be useful for imputing complex epidemiologic data sets in which some patients have missing data.},
+	language = {eng},
+	number = {6},
+	journal = {American Journal of Epidemiology},
+	author = {Shah, Anoop D. and Bartlett, Jonathan W. and Carpenter, James and Nicholas, Owen and Hemingway, Harry},
+	month = mar,
+	year = {2014},
+	pmid = {24589914},
+	pmcid = {PMC3939843},
+	keywords = {imputation, missing data, Humans, Age Factors, angina, stable, Angina, Stable, Artificial Intelligence, Bias, Computer Simulation, Confidence Intervals, Epidemiologic Methods, Health Behavior, Health Status, missingness at random, Proportional Hazards Models, Random Allocation, regression trees, Sex Factors, simulation, survival},
+	pages = {764--774},
+	file = {Full Text:/Users/oliviawilliamson/Zotero/storage/387WV4GU/Shah et al. - 2014 - Comparison of random forest and parametric imputation models for imputing missing data using MICE a.pdf:application/pdf},
+}
+
+@article{lloyd-smith_superspreading_2005,
+	title = {Superspreading and the effect of individual variation on disease emergence},
+	volume = {438},
+	number = {7066},
+	journal = {Nature},
+	author = {Lloyd-Smith, James O and Schreiber, Sebastian J and Kopp, Patrick E and Getz, Wayne M},
+	year = {2005},
+	note = {Publisher: Nature Publishing Group},
+	pages = {355--359},
+}
+
+@book{hilbe_negative_2011,
+	address = {Cambridge, UK},
+	edition = {2},
+	title = {Negative {Binomial} {Regression}},
+	publisher = {Cambridge University Press},
+	author = {Hilbe, Joseph M},
+	year = {2011},
+}
+
+@article{pei_optimizing_2020,
+	title = {Optimizing respiratory disease surveillance in the {United} {States}: {Model}-based evaluation of counterfactual influenza surveillance systems},
+	volume = {30},
+	journal = {Epidemics},
+	author = {Pei, Sen and Kandula, Sasikiran and Shaman, Jeffrey},
+	year = {2020},
+	note = {Publisher: Elsevier},
+	pages = {100377},
+}
+
+@book{casella_statistical_2002,
+	address = {Pacific Grove, CA},
+	edition = {2},
+	title = {Statistical {Inference}},
+	publisher = {Duxbury Press},
+	author = {Casella, George and Berger, Roger L},
+	year = {2002},
+}
+
+@book{grimmett_probability_2001,
+	address = {Oxford, UK},
+	edition = {3},
+	title = {Probability and {Random} {Processes}},
+	publisher = {Oxford University Press},
+	author = {Grimmett, Geoffrey R and Stirzaker, David R},
+	year = {2001},
+}
+
+@article{love_moderated_2014,
+	title = {Moderated estimation of fold change and dispersion for {RNA}-seq data with {DESeq2}},
+	volume = {15},
+	number = {12},
+	journal = {Genome Biology},
+	author = {Love, Michael I and Huber, Wolfgang and Anders, Simon},
+	year = {2014},
+	note = {Publisher: BioMed Central},
+	pages = {550},
+}
+
+@article{robinson_edger_2010,
+	title = {{edgeR}: a {Bioconductor} package for differential expression analysis of digital gene expression data},
+	volume = {26},
+	number = {1},
+	journal = {Bioinformatics},
+	author = {Robinson, Mark D and McCarthy, Davis J and Smyth, Gordon K},
+	year = {2010},
+	note = {Publisher: Oxford University Press},
+	pages = {139--140},
+}
+
+@article{fuentes_statistical_2010,
+	title = {Statistical issues in health impact assessment at the state and local levels},
+	volume = {29},
+	number = {11},
+	journal = {Statistics in Medicine},
+	author = {Fuentes, Montserrat and Rojas, Juan I and Reich, Brian J},
+	year = {2010},
+	note = {Publisher: Wiley Online Library},
+	pages = {1209--1219},
+}
+
+@article{lloyd-smith_superspreading_2005-1,
+	title = {Superspreading and the effect of individual variation on disease emergence},
+	volume = {438},
+	doi = {10.1038/nature04153},
+	number = {7066},
+	journal = {Nature},
+	author = {Lloyd-Smith, James O. and Schreiber, Sebastian J. and Kopp, Peter E. and Getz, Wayne M.},
+	year = {2005},
+	pages = {355--359},
+}
+
+@book{hilbe_negative_2011-1,
+	address = {Cambridge},
+	edition = {2},
+	title = {Negative {Binomial} {Regression}},
+	publisher = {Cambridge University Press},
+	author = {Hilbe, Joseph M.},
+	year = {2011},
+}
+
+@article{pei_differential_2020,
+	title = {Differential effects of intervention timing on {COVID}-19 spread in the {United} {States}},
+	volume = {6},
+	doi = {10.1126/sciadv.abd6370},
+	number = {49},
+	journal = {Science Advances},
+	author = {Pei, Sen and Kandula, Sasikiran and Shaman, Jeffrey},
+	year = {2020},
+	pages = {eabd6370},
+}
+
+@article{love_moderated_2014-1,
+	title = {Moderated estimation of fold change and dispersion for {RNA}-seq data with {DESeq2}},
+	volume = {15},
+	doi = {10.1186/s13059-014-0550-8},
+	number = {12},
+	journal = {Genome Biology},
+	author = {Love, Michael I. and Huber, Wolfgang and Anders, Simon},
+	year = {2014},
+	pages = {550},
+}
+
+@article{robinson_edger_2010-1,
+	title = {{edgeR}: a {Bioconductor} package for differential expression analysis of digital gene expression data},
+	volume = {26},
+	doi = {10.1093/bioinformatics/btp616},
+	number = {1},
+	journal = {Bioinformatics},
+	author = {Robinson, Mark D. and McCarthy, Davis J. and Smyth, Gordon K.},
+	year = {2010},
+	pages = {139--140},
+}
+
+@article{fuentes_negative_2010,
+	title = {Negative binomial regression applications in environmental epidemiology (placeholder title)},
+	journal = {To be verified},
+	author = {Fuentes, Author to verify},
+	year = {2010},
+	annote = {PLACEHOLDER: Please replace with the exact Fuentes et al. 2010 citation used in your overdispersion section.},
+}
+
+@article{knuth_literate_1984,
+	title = {Literate {Programming}},
+	volume = {27},
+	issn = {0010-4620},
+	url = {https://doi.org/10.1093/comjnl/27.2.97},
+	doi = {10.1093/comjnl/27.2.97},
+	number = {2},
+	journal = {Comput. J.},
+	author = {Knuth, Donald E.},
+	month = may,
+	year = {1984},
+	note = {Place: USA
+Publisher: Oxford University Press, Inc.},
+	pages = {97--111},
+}
+
+@misc{centers_for_disease_control_and_prevention_covid-19_2022,
+	title = {{COVID}-19 {Vaccination} {Coverage}, {United} {States}, 2022},
+	url = {https://www.cdc.gov/vaccines/imz-managers/coverage/index.html},
+	author = {{Centers for Disease Control and Prevention}},
+	year = {2022},
+	annote = {Accessed: 2025-09-15},
+}
+
+@article{hamza_binomial_2008,
+	title = {The {Binomial} {Distribution} of {Meta}-{Analysis} {Was} {Preferred} to {Model} within-{Study} {Variability}},
+	volume = {61},
+	issn = {0895-4356},
+	doi = {10.1016/j.jclinepi.2007.03.016},
+	abstract = {OBJECTIVE: When studies report proportions such as sensitivity or specificity, it is customary to meta-analyze them using the DerSimonian and Laird random effects model. This method approximates the within-study variability of the proportion by a normal distribution, which may lead to bias for several reasons. Alternatively an exact likelihood approach based on the binomial within-study distribution can be used. This method can easily be performed in standard statistical packages. We investigate the performance of the standard method and the alternative approach. STUDY DESIGN AND SETTING: We compare the two approaches through a simulation study, in terms of bias, mean-squared error, and coverage probabilities. We varied the size of the overall sensitivity or specificity, the between-studies variance, the within-study sample sizes, and the number of studies. The methods are illustrated using a published meta-analysis data set. RESULTS: The exact likelihood approach performs always better than the approximate approach and gives unbiased estimates. The coverage probability, in particular for the profile likelihood, is also reasonably acceptable. In contrast, the approximate approach gives huge bias with very poor coverage probability in many cases. CONCLUSION: The exact likelihood approach is the method of preference and should be used whenever feasible.},
+	number = {1},
+	journal = {Journal of Clinical Epidemiology},
+	author = {Hamza, Taye H. and van Houwelingen, Hans C. and Stijnen, Theo},
+	month = jan,
+	year = {2008},
+	pmid = {18083461},
+	keywords = {Humans, Alzheimer Disease, Binomial Distribution, Data Interpretation Statistical, Diagnostic Techniques and Procedures, Fluorodeoxyglucose F18, Meta-Analysis as Topic, Models Statistical, Positron-Emission Tomography, Radiopharmaceuticals},
+	pages = {41--51},
+}
+
+@article{nyaga_metaprop_2014,
+	title = {Metaprop: {A} {Stata} {Command} to {Perform} {Meta}-{Analysis} of {Binomial} {Data}},
+	volume = {72},
+	issn = {2049-3258},
+	shorttitle = {Metaprop},
+	doi = {10.1186/2049-3258-72-39},
+	abstract = {Meta-analyses have become an essential tool in synthesizing evidence on clinical and epidemiological questions derived from a multitude of similar studies assessing the particular issue. Appropriate and accessible statistical software is needed to produce the summary statistic of interest.},
+	number = {1},
+	urldate = {2025-09-20},
+	journal = {Archives of Public Health},
+	author = {Nyaga, Victoria N. and Arbyn, Marc and Aerts, Marc},
+	month = nov,
+	year = {2014},
+	keywords = {Binomial, Confidence intervals, Freeman-Tukey double arcsine transformation, Logistic-normal, Meta-analysis, Stata},
+	pages = {39},
+}
+
+@article{snipen_microbial_2009,
+	title = {Microbial {Comparative} {Pan}-{Genomics} {Using} {Binomial} {Mixture} {Models}},
+	volume = {10},
+	issn = {1471-2164},
+	doi = {10.1186/1471-2164-10-385},
+	abstract = {The size of the core- and pan-genome of bacterial species is a topic of increasing interest due to the growing number of sequenced prokaryote genomes, many from the same species. Attempts to estimate these quantities have been made, using regression methods or mixture models. We extend the latter approach by using statistical ideas developed for capture-recapture problems in ecology and epidemiology.},
+	number = {1},
+	urldate = {2025-09-20},
+	journal = {BMC Genomics},
+	author = {Snipen, Lars and Almøy, Trygve and Ussery, David W.},
+	month = aug,
+	year = {2009},
+	keywords = {Coxiella Burnetii, Detection Probability, Francisella Tularensis, Gene Family, Mixture Model},
+	pages = {385},
+}
+
+@article{sparta_binomial_2024,
+	title = {Binomial {Models} {Uncover} {Biological} {Variation} during {Feature} {Selection} of {Droplet}-{Based} {Single}-{Cell} {RNA} {Sequencing}},
+	volume = {20},
+	issn = {1553-7358},
+	doi = {10.1371/journal.pcbi.1012386},
+	abstract = {Effective analysis of single-cell RNA sequencing (scRNA-seq) data requires a rigorous distinction between technical noise and biological variation. In this work, we propose a simple feature selection model, termed "Differentially Distributed Genes" or DDGs, where a binomial sampling process for each mRNA species produces a null model of technical variation. Using scRNA-seq data where cell identities have been established a priori, we find that the DDG model of biological variation outperforms existing methods. We demonstrate that DDGs distinguish a validated set of real biologically varying genes, minimize neighborhood distortion, and enable accurate partitioning of cells into their established cell-type groups.},
+	number = {9},
+	journal = {PLoS computational biology},
+	author = {Sparta, Breanne and Hamilton, Timothy and Natesan, Gunalan and Aragones, Samuel D. and Deeds, Eric J.},
+	month = sep,
+	year = {2024},
+	pmcid = {PMC11410258},
+	pmid = {39241106},
+	keywords = {Algorithms, Gene Expression Profiling, Humans, Models Statistical, Animals, Computational Biology, RNA Messenger, Sequence Analysis RNA, Single-Cell Analysis},
+	pages = {e1012386},
+}
+
+@article{young-xu_pooling_2008,
+	title = {Pooling {Overdispersed} {Binomial} {Data} to {Estimate} {Event} {Rate}},
+	volume = {8},
+	issn = {1471-2288},
+	doi = {10.1186/1471-2288-8-58},
+	abstract = {The beta-binomial model is one of the methods that can be used to validly combine event rates from overdispersed binomial data. Our objective is to provide a full description of this method and to update and broaden its applications in clinical and public health research.},
+	number = {1},
+	urldate = {2025-09-20},
+	journal = {BMC Medical Research Methodology},
+	author = {Young-Xu, Yinong and Chan, K. Arnold},
+	month = aug,
+	year = {2008},
+	keywords = {Dermatophytosis, Griseofulvin, Itraconazole, Terbinafine, Tinea Pedis},
+	pages = {58},
+}
+
+@article{xue_regression_1997,
+	title = {Regression analysis of discrete time survival data under heterogeneity},
+	volume = {16},
+	copyright = {Copyright © 1997 John Wiley \& Sons, Ltd.},
+	issn = {1097-0258},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-0258%2819970915%2916%3A17%3C1983%3A%3AAID-SIM628%3E3.0.CO%3B2-3},
+	doi = {10.1002/(SICI)1097-0258(19970915)16:17<1983::AID-SIM628>3.0.CO;2-3},
+	abstract = {This paper concerns the regression analysis of discrete time survival data for heterogeneous populations by means of frailty models. We express the survival time for each individual as a sequence of binary variables that indicate if the individual survived at each time point. The main result is that the likelihood for these indicators can be factored into contributions that involve the conditional survival probabilities integrated over the frailty distribution of the risk set (population-averaged). We then model these population-averaged conditional probabilities as a function of covariates. The result justifies the practice of treating the failure indicators as independent Bernoulli trials and fitting binary regression models for the conditional failure probabilities at each time point. However, we must interpret the regression coefficients as population-averaged rather than subject-specific parameters. We apply the method to the Framingham Heart Study on risk factors for cardiovascular disease. © 1997 by John Wiley \& Sons, Ltd.},
+	language = {en},
+	number = {17},
+	urldate = {2025-09-11},
+	journal = {Statistics in Medicine},
+	author = {Xue, Xiaonan and Brookmeyer, Ron},
+	year = {1997},
+	pages = {1983--1993},
+	annote = {\_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/\%28SICI\%291097-0258\%2819970915\%2916\%3A17\%3C1983\%3A\%3AAID-SIM628\%3E3.0.CO\%3B2-3},
+}
+
+@inproceedings{bemando_machine-learning-based_2021,
+	title = {Machine-{Learning}-{Based} {Prediction} {Models} of {Coronary} {Heart} {Disease} {Using} {Naïve} {Bayes} and {Random} {Forest} {Algorithms}},
+	url = {https://ieeexplore.ieee.org/abstract/document/9537060},
+	doi = {10.1109/ICSECS52883.2021.00049},
+	abstract = {Coronary heart disease (CHD), alternatively known as cardiovascular disease (CVD) is the number one cause of death in the world. Accordingly, a plethora of research have been conducted to predict the early diagnosis of the heart disease and determine the most important risk factors associated with the disease. Despite these considerable efforts, the accuracy of the prediction has remained inadequate and the most important risk factors have remained elusive. This research paper discusses many risk factors associated with the disease and presents the prediction models of coronary heart disease using supervised machine learning algorithms, namely Gaussian Naïve Bayes, Bernoulli Naïve Bayes and Random Forest algorithms. It uses the public dataset from the Cleveland database of UCI repository of coronary heart disease patients. The results show that the Gaussian Naïve Bayes, Bernoulli Naïve Bayes and Random Forest algorithms have accuracies of 85.00\%, 85.00\% and 75.00\%, respectively. Moreover, the precision, F-measure and recall of the Gaussian and Bernoulli Naïve Bayes are higher than those of Random Forest algorithm, signifying its importance in predicting the early diagnosis of the disease.},
+	urldate = {2025-09-11},
+	booktitle = {2021 {International} {Conference} on {Software} {Engineering} \& {Computer} {Systems} and 4th {International} {Conference} on {Computational} {Science} and {Information} {Management} ({ICSECS}-{ICOCSIM})},
+	author = {Bemando, Charles and Miranda, Eka and Aryuni, Mediana},
+	month = aug,
+	year = {2021},
+	keywords = {Bernoulli Naïve Bayes, Computational modeling, Databases, factors, Gaussian Naïve Bayes, Heart, heart disease, machine learning, Machine learning algorithms, Prediction algorithms, Predictive models, Random Forest, risk, Scientific computing},
+	pages = {232--237},
+}
+
+@misc{thompson_minimum_2010,
+	title = {Minimum {Variance} {Estimators}},
+	url = {https://faculty.washington.edu/eathomp/S341_10/Hwks/Cramer_Rao_soln.pdf},
+	urldate = {2025-09-14},
+	author = {Thompson, E.A.},
+	month = feb,
+	year = {2010},
+}
+
+@book{mccullagh_generalized_2018,
+	address = {Boca Raton},
+	title = {Generalized {Linear} {Models}},
+	isbn = {978-0-412-31760-6},
+	abstract = {The success of the first edition of Generalized Linear Models led to the updated Second Edition, which continues to provide a definitive unified, treatment of methods for the analysis of diverse types of data. Today, it remains popular for its clarity, richness of content and direct relevance to agricultural, biological, health, engineering, and other applications.The authors focus on examining the way a response variable depends on a combination of explanatory variables, treatment, and classification variables. They give particular emphasis to the important case where the dependence occurs through some unknown, linear combination of the explanatory variables.The Second Edition includes topics added to the core of the first edition, including conditional and marginal likelihood methods, estimating equations, and models for dispersion effects and components of dispersion. The discussion of other topics-log-linear and related models, log odds-ratio regression models, multinomial response models, inverse linear and related models, quasi-likelihood functions, and model checking-was expanded and incorporates significant revisions.Comprehension of the material requires simply a knowledge of matrix theory and the basic ideas of probability theory, but for the most part, the book is self-contained. Therefore, with its worked examples, plentiful exercises, and topics of direct use to researchers in many disciplines, Generalized Linear Models serves as ideal text, self-study guide, and reference.},
+	language = {English},
+	publisher = {Chapman and Hall/CRC},
+	author = {McCullagh, P. and Nelder, John A.},
+	year = {2018},
+}
+
+@book{gelman_bayesian_2013,
+	edition = {3},
+	title = {Bayesian {Data} {Analysis}},
+	publisher = {Chapman \& Hall/CRC},
+	author = {Gelman, Andrew and Carlin, John B. and Stern, Hal S. and Dunson, David B. and Vehtari, Aki and Rubin, Donald B.},
+	year = {2013},
+}
+
+@book{hosmer_applied_2013,
+	edition = {3},
+	title = {Applied {Logistic} {Regression}},
+	publisher = {Wiley},
+	author = {Hosmer, David W. and Lemeshow, Stanley and Sturdivant, Rodney X.},
+	month = mar,
+	year = {2013},
+}
+
+@book{johnson_univariate_2005,
+	edition = {3},
+	title = {Univariate {Discrete} {Distributions}},
+	isbn = {978-0-471-27246-5},
+	url = {https://onlinelibrary.wiley.com/doi/book/10.1002/0471715816},
+	publisher = {Wiley},
+	author = {Johnson, Norman L. and Kemp, Adrienne W. and Kotz, Samuel},
+	month = jan,
+	year = {2005},
+}
+
+@book{casella_statistical_2002-1,
+	edition = {2},
+	title = {Statistical {Inference}},
+	publisher = {Duxbury Advanced Series},
+	author = {Casella, George and Berger, L., Roger},
+	year = {2002},
+}
+
+@article{agresti_approximate_1998,
+	title = {Approximate is {Better} than “{Exact}” for {Interval} {Estimation} of {Binomial} {Proportions}},
+	volume = {52},
+	issn = {0003-1305},
+	url = {https://doi.org/10.1080/00031305.1998.10480550},
+	doi = {10.1080/00031305.1998.10480550},
+	abstract = {For interval estimation of a proportion, coverage probabilities tend to be too large for “exact” confidence intervals based on inverting the binomial test and too small for the interval based on inverting the Wald large-sample normal test (i.e., sample proportion ± z-score × estimated standard error). Wilson's suggestion of inverting the related score test with null rather than estimated standard error yields coverage probabilities close to nominal confidence levels, even for very small sample sizes. The 95\% score interval has similar behavior as the adjusted Wald interval obtained after adding two “successes” and two “failures” to the sample. In elementary courses, with the score and adjusted Wald methods it is unnecessary to provide students with awkward sample size guidelines.},
+	number = {2},
+	urldate = {2025-09-14},
+	journal = {The American Statistician},
+	author = {Agresti, Alan and Coull, Brent A.},
+	month = may,
+	year = {1998},
+	keywords = {Confidence interval, Discrete distribution, Exact inference, Poisson distribution, Score test, Small sample},
+	pages = {119--126},
+	annote = {Publisher: ASA Website \_eprint: https://doi.org/10.1080/00031305.1998.10480550},
+}
+
+@article{wu_using_2020,
+	title = {Using three statistical methods to analyze the association between exposure to 9 compounds and obesity in children and adolescents: {NHANES} 2005-2010},
+	volume = {19},
+	issn = {1476-069X},
+	shorttitle = {Using three statistical methods to analyze the association between exposure to 9 compounds and obesity in children and adolescents},
+	url = {https://doi.org/10.1186/s12940-020-00642-6},
+	doi = {10.1186/s12940-020-00642-6},
+	abstract = {Various risk factors influence obesity differently, and environmental endocrine disruption may increase the occurrence of obesity. However, most of the previous studies have considered only a unitary exposure or a set of similar exposures instead of mixed exposures, which entail complicated interactions. We utilized three statistical models to evaluate the correlations between mixed chemicals to analyze the association between 9 different chemical exposures and obesity in children and adolescents.},
+	number = {1},
+	urldate = {2025-09-15},
+	journal = {Environmental Health},
+	author = {Wu, Bangsheng and Jiang, Yi and Jin, Xiaoqing and He, Li},
+	month = aug,
+	year = {2020},
+	keywords = {Adolescent, Bayesian kernel machine regression (BKMR), Child, Obesity, Weighted quantile sum (WQS) regression},
+	pages = {94},
+}
+
+@article{branson_randomization-based_2019,
+	title = {Randomization-based inference for {Bernoulli} trial experiments and implications for observational studies},
+	volume = {28},
+	issn = {0962-2802},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6027661/},
+	doi = {10.1177/0962280218756689},
+	abstract = {We present a randomization-based inferential framework for experiments characterized by a strongly ignorable assignment mechanism where units have independent probabilities of receiving treatment. Previous works on randomization tests often assume these probabilities are equal within blocks of units. We consider the general case where they differ across units and show how to perform randomization tests and obtain point estimates and confidence intervals. Furthermore, we develop rejection-sampling and importance-sampling approaches for conducting randomization-based inference conditional on any statistic of interest, such as the number of treated units or forms of covariate balance. We establish that our randomization tests are valid tests, and through simulation we demonstrate how the rejection-sampling and importance-sampling approaches can yield powerful randomization tests and thus precise inference. Our work also has implications for observational studies, which commonly assume a strongly ignorable assignment mechanism. Most methodologies for observational studies make additional modeling or asymptotic assumptions, while our framework only assumes the strongly ignorable assignment mechanism, and thus can be considered a minimal-assumption approach.},
+	number = {5},
+	urldate = {2025-09-15},
+	journal = {Statistical methods in medical research},
+	author = {Branson, Zach and Bind, Marie-Abèle},
+	month = may,
+	year = {2019},
+	pmid = {29451089},
+	pmcid = {PMC6027661},
+	pages = {1378--1398},
+}
+
+@article{agegnehu_exploring_2021,
+	title = {Exploring spatial variation in {BCG} vaccination among children 0–35 months in {Ethiopia}: spatial analysis of {Ethiopian} {Demographic} and {Health} {Survey} 2016},
+	volume = {11},
+	issn = {2044-6055},
+	shorttitle = {Exploring spatial variation in {BCG} vaccination among children 0–35 months in {Ethiopia}},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8094339/},
+	doi = {10.1136/bmjopen-2020-043565},
+	abstract = {Objective Tuberculosis is a major public health problem and is the second leading cause of death worldwide. BCG vaccination is a life-saving and important part of standard tuberculosis control measures, particularly in Ethiopia where tuberculosis is endemic. The End Tuberculosis Strategy targets of 2020 have not been achieved. Exploring spatial variations in BCG vaccination among children is vital to designing and monitoring effective intervention programmes. Therefore, this study aimed to explore the spatial variation in BCG vaccination among children in Ethiopia. Design Cross-sectional study design. Setting Ethiopia. Participants Children aged 0–35 months. Primary outcome BCG vaccination coverage. Methods Data from the 2016 Ethiopian Demographic and Health Survey were used and a total of 4453 children aged 0–35 months were included. Spatial autocorrelation analysis, cluster and outlier analysis, hotspot analysis, spatial interpolation, and spatial scan statistics were carried out to identify geographical risk areas for BCG vaccine utilisation. ArcGIS V.10.6 and SaTScan V.9.6 statistical software were employed to explore spatial pattern and significant hotspot areas for BCG vaccination among children. Results BCG vaccination was spatially clustered in Ethiopia at the regional level (Global Moran’s I=0.516, p{\textbackslash}textless0.001). A total of 51 most likely clusters of low BCG vaccination were identified in the Somali and Afar regions (log-likelihood ratio=136.58, p{\textbackslash}textless0.001). Significant secondary clusters were also identified in North West Gambela, South Amhara, South West Addis Ababa, North East Southern Nations, Nationalities, and People’s Region, and South West Oromia. Conclusion A low probability of receiving BCG vaccination was found among children in the Somali and Afar regions. Therefore, these areas should be given attention when designing effective immunisation strategies to improve BCG vaccination among children in order to reduce the burden of tuberculosis in Ethiopia.},
+	number = {4},
+	urldate = {2025-09-15},
+	journal = {BMJ Open},
+	author = {Agegnehu, Chilot Desta and Alem, Adugnaw Zeleke},
+	month = apr,
+	year = {2021},
+	pmid = {33910946},
+	pmcid = {PMC8094339},
+	pages = {e043565},
+}
+
+@article{abbasi_partial_2022,
+	title = {On partial randomized response model using ranked set sampling},
+	volume = {17},
+	issn = {1932-6203},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9707803/},
+	doi = {10.1371/journal.pone.0277497},
+	abstract = {In this paper, we propose a partial randomized response technique to collect reliable sensitive data for estimation of population proportion in ranked set sampling (RSS) scheme using auxiliary information. The idea is to increase confidence and (or) co-operation of the respondents by providing them the option of both ‘direct’ and ‘randomized’ response for the inquired sensitive question. This option is quite logical because perception of sensitive (insensitive) inquiry can vary among respondents. The properties of the proposed method are discussed and compared with existing randomized response techniques. Cost analysis is also carried out to prove supremacy of the suggested method. Finally, an application to clinical trial on AIDS is included.},
+	number = {11},
+	urldate = {2025-09-15},
+	journal = {PLOS ONE},
+	author = {Abbasi, Azhar Mehmood and Shad, Muhammad Yousaf and Ahmed, Aneel},
+	month = nov,
+	year = {2022},
+	pmid = {36445862},
+	pmcid = {PMC9707803},
+	pages = {e0277497},
+}

@@ -50,106 +50,6 @@ Instead, trials continue until a fixed number of **successes** \(r\) occurs, and
 The NB distribution is widely applied in **biostatistics, epidemiology, and public health** to model count outcomes such as number of hospital visits, infectious disease cases, or equipment failures, especially when variability exceeds Poisson expectations.
 
 
-### Modeling Count Data
-
-Count data can be modeled with the **Poisson** distribution.
-
-$$
-P(Y = y |\lambda) = \frac{e^{-\lambda}\lambda^{y}}{y!}, \ \ y = 0,1,2,\ldots
-$$
-
-In the Poisson distribution, the mean and variance are equal $E[X] = Var(X) = \lambda$.
-
-However there are situations in real world data in which the variance is greater than the mean, $Var(X) > E[X]$ -- we say the data is **overdispersed**. To account for this, we can assume that $\lambda$ follows a distribution instead of being fixed.
-
-
-### The Poisson-Gamma Mixture Model 
-
-Assume $Y \sim Poisson(\lambda)$. Instead of a fixed $\lambda$, assume $\lambda \sim Gamma(\alpha, \beta)$. 
-
-Now we have a hierarchical model:
-
-
-\begin{split}
-
-P(Y = y |\lambda) = \frac{e^{-\lambda}\lambda^{y}}{y!}, \ \ x = 0,1,2,\ldots \\
-
-f(\lambda) = \frac{\beta^\alpha}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\lambda\beta}, \lambda > 0 \\
-
-\end{split}
-
-
-### The Unconditional Probability $P(Y = y)$
-
-Now if we want the $P(Y = y)$, we marginalize out $\lambda$:
-
-\begin{split}
-
-P(Y = y) &= \int_{0}^{\infty}P(Y=y|\lambda)f(\lambda)d\lambda \\
-
-&= \int_{0}^{\infty}\frac{e^{-\lambda}\lambda^{y}}{y!}\frac{\beta^\alpha}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\lambda\beta}d\lambda \\
-
-&= \frac{\beta^\alpha}{y!\Gamma(\alpha)}\int_{0}^{\infty}e^{-\lambda}\lambda^y\lambda^{\alpha-1}e^{\lambda\beta}d\lambda \\
-
-&= \frac{\beta^\alpha}{y!\Gamma(\alpha)}\int_{0}^{\infty}\lambda^{\alpha + y -1}e^{\lambda\beta-\lambda}d\lambda \\
-
-&= \frac{\beta^\alpha}{y!\Gamma(\alpha)}\int_{0}^{\infty}\lambda^{\alpha + y -1}e^{-\lambda(\beta+1)}d\lambda  \ \ & &\text{kernel of } Gamma(\alpha+y,\beta+1)\\
-
-&= \frac{\beta^\alpha}{y!\Gamma(\alpha)}\frac{\Gamma(\alpha+y)}{(\beta+1)^{\alpha+y}} \\
-
-&= \frac{\beta^\alpha\Gamma(\alpha+y)}{(\beta+1)^{\alpha}(\beta+1)^yy!\Gamma(\alpha)} \\
-
-&= \frac{\Gamma(\alpha+y)}{y!\Gamma(\alpha)}\left(\frac{\beta}{\beta+1}\right)^\alpha\left(\frac{1}{\beta+1}\right)^y & &\text{collect terms} \\
-
-&= \frac{(a + y - 1)!}{y!(a-1)!}\left(\frac{\beta}{\beta+1}\right)^\alpha\left(\frac{1}{\beta+1}\right)^y & &\text{convert gamma to factorial} \\
-
-&= \frac{(a + y - 1)!}{y!(a-1)!}\left(p\right)^\alpha\left(1-p\right)^y & & \text{let } p = \frac{\beta}{\beta+1} \\
-
-
-&= {{\alpha+y-1}\choose{y}}\left(p\right)^\alpha\left(1-p\right)^y \sim NB(\alpha, p)
-
-\end{split}
-
-:::{.callout}
-**The unconditional probability $P(Y=y)$ follows a negative binomial distribution, where, $\alpha$ is the number of successes, and $y$ is the number of failures.** 
-:::
-
-
-### How does this ensure $Var(Y) > E[Y]$?
-
-This adds additional variability to $Y$ via the **law of total variance**:
-
-\begin{split}
-Var[Y] &= E[Var(Y|\lambda)] + Var(E[Y|\lambda]) \\
-
-&= E[\lambda] + Var(\lambda) \\
-
-&= \frac{\alpha}{\beta} + \frac{\alpha}{\beta^2} \\
-
-&= \mu + \frac{\mu^2}{\alpha} \ \, \text{where } \mu = \alpha / \beta
-
-\end{split}
-
-Compare this variance $Var(Y) = E[\lambda] + Var(\lambda)$ to the original Poisson variable $Var(Y|\lambda) = \lambda$. We've inflated the variance of $Y$ by treating $\lambda$ as random.
-
-
-In this parametrization, the variance of $Y$ is quadratic in $\mu$ at a rate controlled by the **dispersion parameter** $\alpha$, which is also the number of "successes" in the negative binomial distribution.
-
-In terms of p:
-
-
-\begin{split}
-\mu &= \frac{\alpha}{\beta} \\
-
-&= \frac{\alpha}{\frac{p}{1-p}} \text{, } \ \ \beta = \frac{p}{1-p} \\
-
-&= \alpha\left(\frac{1-p}{p}\right)
-
-\end{split}
-
-Which is the typical form of the $E[X]$ for $X \sim NB(\alpha,p)$
-
-
 ### Case Study: Negative Binomial Distribution in Modern Policy
 
 A timely application of the Negative Binomial distribution is in **modeling COVID-19 case counts across counties**.  
@@ -279,122 +179,6 @@ par(mfrow = c(1, 1))
 ```
 
 </br>
-
-
-
-## Example with Data: Overdispersed Emergency Visits
-
-Counts of daily **emergency department (ED) visits** often show variability greater than expected under a Poisson model (variance ≫ mean). A **Negative Binomial** model accommodates this overdispersion and typically yields better fit and uncertainty quantification than Poisson regression [@hilbe2011].
-
-We’ll simulate 90 days of ED visit counts for two hospitals (A and B). Hospital B has a higher baseline and slightly greater day-to-day variability. We then compare Poisson vs. Negative Binomial fits.
-
-```{r}
-#| label: nb-example-simulate
-#| message: false
-#| warning: false
-
-set.seed(20250310)
-
-library(MASS)       # for glm.nb
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-
-n_days <- 90
-df <- tibble(
-  day  = 1:n_days,
-  # Hospital assignment alternating by week (just to make patterns visible)
-  hosp = if_else(((day - 1) %/% 7) %% 2 == 0, "A", "B")
-) |>
-  mutate(
-    mu   = if_else(hosp == "A", 12, 18),   # mean level
-    size = if_else(hosp == "A", 6, 4),     # NB 'size' (smaller -> more overdispersion)
-    # Simulate NB counts with mean/size parameterization
-    y    = rnbinom(n = n(), mu = mu, size = size)
-  )
-
-# Quick diagnostics: mean vs variance by hospital
-df_sum <- df |>
-  group_by(hosp) |>
-  summarise(
-    mean_y = mean(y),
-    var_y  = var(y),
-    .groups = "drop"
-  )
-
-df_sum
-
-```
-The mean–variance check helps flag overdispersion:
-
-```{r}
-#| label: nb-example-meanvar-plot
-
-ggplot(df, aes(x = hosp, y = y)) +
-  geom_boxplot(outlier.alpha = 0.5) +
-  labs(x = "Hospital", y = "Daily ED visits",
-       title = "Daily ED visits by hospital (simulated)")
-```
-
-
-### Fit Poisson vs. Negative Binomial
-
-We model daily counts with a hospital indicator.  
-
-- A **Poisson GLM** assumes  
-$[\mathrm{Var}(Y \mid X) = \mathbb{E}(Y \mid X),]$  
-
-- A **Negative Binomial GLM** relaxes this assumption and allows  
-$[\mathrm{Var}(Y \mid X) > \mathbb{E}(Y \mid X),]$
-through an extra **dispersion parameter** [@hilbe2011].
-
-
-```{r}
-#| label: nb-example-fit
-
-# Poisson GLM
-fit_pois <- glm(y ~ hosp, data = df, family = poisson())
-
-# Negative Binomial GLM
-fit_nb   <- glm.nb(y ~ hosp, data = df)
-
-# Compare model fit
-tibble(
-  model = c("Poisson", "NegBin"),
-  AIC   = c(AIC(fit_pois), AIC(fit_nb))
-) |>
-  arrange(AIC)
-
-```
-
-A lower AIC indicates better fit. Overdispersion can also be checked for the Poisson model via a simple dispersion statistic:
-
-```{r}
-#| label: nb-example-dispersion
-
-# Residual deviance / df for Poisson (values >> 1 suggest overdispersion)
-dispersion_pois <- sum(residuals(fit_pois, type = "pearson")^2) / fit_pois$df.residual
-dispersion_pois
-```
-**Interpretation**
-
-The Negative Binomial model should produce a lower AIC and a reasonable dispersion, reflecting extra-Poisson variability.
-
-The coefficient for hospB (on the log scale) estimates the multiplicative difference in mean daily visits for B vs. A. Exponentiating the coefficient gives an incidence rate ratio (IRR):
-
-```{r}
-#| label: nb-example-irr
-
-coef_nb <- coef(summary(fit_nb))
-IRR     <- exp(coef_nb["hospB", "Estimate"])
-IRR
-
-```
-
-An $IRR > 1$ indicates Hospital B’s expected daily visits exceed Hospital A’s, after accounting for overdispersion.
-
-**Takeaway:** When count data show variance > mean, the Negative Binomial is a principled alternative to Poisson, improving fit and inference for policy-relevant outcomes like hospital demand [@hilbe2011].
-
 
 
 ## Formal Foundations
@@ -826,3 +610,221 @@ The Negative Binomial distribution with parameters \(r > 0\) and \(0 < p < 1\) h
 
 
 
+## Appendix
+
+
+
+### Modeling Count Data
+
+Count data can be modeled with the **Poisson** distribution.
+
+$$
+P(Y = y |\lambda) = \frac{e^{-\lambda}\lambda^{y}}{y!}, \ \ y = 0,1,2,\ldots
+$$
+
+In the Poisson distribution, the mean and variance are equal $E[X] = Var(X) = \lambda$.
+
+However there are situations in real world data in which the variance is greater than the mean, $Var(X) > E[X]$ -- we say the data is **overdispersed**. To account for this, we can assume that $\lambda$ follows a distribution instead of being fixed.
+
+
+### The Poisson-Gamma Mixture Model 
+
+Assume $Y \sim Poisson(\lambda)$. Instead of a fixed $\lambda$, assume $\lambda \sim Gamma(\alpha, \beta)$. 
+
+Now we have a hierarchical model:
+
+
+\begin{split}
+
+P(Y = y |\lambda) = \frac{e^{-\lambda}\lambda^{y}}{y!}, \ \ x = 0,1,2,\ldots \\
+
+f(\lambda) = \frac{\beta^\alpha}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\lambda\beta}, \lambda > 0 \\
+
+\end{split}
+
+
+### The Unconditional Probability $P(Y = y)$
+
+Now if we want the $P(Y = y)$, we marginalize out $\lambda$:
+
+\begin{split}
+
+P(Y = y) &= \int_{0}^{\infty}P(Y=y|\lambda)f(\lambda)d\lambda \\
+
+&= \int_{0}^{\infty}\frac{e^{-\lambda}\lambda^{y}}{y!}\frac{\beta^\alpha}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\lambda\beta}d\lambda \\
+
+&= \frac{\beta^\alpha}{y!\Gamma(\alpha)}\int_{0}^{\infty}e^{-\lambda}\lambda^y\lambda^{\alpha-1}e^{\lambda\beta}d\lambda \\
+
+&= \frac{\beta^\alpha}{y!\Gamma(\alpha)}\int_{0}^{\infty}\lambda^{\alpha + y -1}e^{\lambda\beta-\lambda}d\lambda \\
+
+&= \frac{\beta^\alpha}{y!\Gamma(\alpha)}\int_{0}^{\infty}\lambda^{\alpha + y -1}e^{-\lambda(\beta+1)}d\lambda  \ \ & &\text{kernel of } Gamma(\alpha+y,\beta+1)\\
+
+&= \frac{\beta^\alpha}{y!\Gamma(\alpha)}\frac{\Gamma(\alpha+y)}{(\beta+1)^{\alpha+y}} \\
+
+&= \frac{\beta^\alpha\Gamma(\alpha+y)}{(\beta+1)^{\alpha}(\beta+1)^yy!\Gamma(\alpha)} \\
+
+&= \frac{\Gamma(\alpha+y)}{y!\Gamma(\alpha)}\left(\frac{\beta}{\beta+1}\right)^\alpha\left(\frac{1}{\beta+1}\right)^y & &\text{collect terms} \\
+
+&= \frac{(a + y - 1)!}{y!(a-1)!}\left(\frac{\beta}{\beta+1}\right)^\alpha\left(\frac{1}{\beta+1}\right)^y & &\text{convert gamma to factorial} \\
+
+&= \frac{(a + y - 1)!}{y!(a-1)!}\left(p\right)^\alpha\left(1-p\right)^y & & \text{let } p = \frac{\beta}{\beta+1} \\
+
+
+&= {{\alpha+y-1}\choose{y}}\left(p\right)^\alpha\left(1-p\right)^y \sim NB(\alpha, p)
+
+\end{split}
+
+:::{.callout}
+**The unconditional probability $P(Y=y)$ follows a negative binomial distribution, where, $\alpha$ is the number of successes, and $y$ is the number of failures.** 
+:::
+
+
+### How does this ensure $Var(Y) > E[Y]$?
+
+This adds additional variability to $Y$ via the **law of total variance**:
+
+\begin{split}
+Var[Y] &= E[Var(Y|\lambda)] + Var(E[Y|\lambda]) \\
+
+&= E[\lambda] + Var(\lambda) \\
+
+&= \frac{\alpha}{\beta} + \frac{\alpha}{\beta^2} \\
+
+&= \mu + \frac{\mu^2}{\alpha} \ \, \text{where } \mu = \alpha / \beta
+
+\end{split}
+
+Compare this variance $Var(Y) = E[\lambda] + Var(\lambda)$ to the original Poisson variable $Var(Y|\lambda) = \lambda$. We've inflated the variance of $Y$ by treating $\lambda$ as random.
+
+
+In this parametrization, the variance of $Y$ is quadratic in $\mu$ at a rate controlled by the **dispersion parameter** $\alpha$, which is also the number of "successes" in the negative binomial distribution.
+
+In terms of p:
+
+
+\begin{split}
+\mu &= \frac{\alpha}{\beta} \\
+
+&= \frac{\alpha}{\frac{p}{1-p}} \text{, } \ \ \beta = \frac{p}{1-p} \\
+
+&= \alpha\left(\frac{1-p}{p}\right)
+
+\end{split}
+
+Which is the typical form of the $E[X]$ for $X \sim NB(\alpha,p)$
+
+
+
+## Example with Data: Overdispersed Emergency Visits
+
+
+Counts of daily **emergency department (ED) visits** often show variability greater than expected under a Poisson model (variance ≫ mean). A **Negative Binomial** model accommodates this overdispersion and typically yields better fit and uncertainty quantification than Poisson regression [@hilbe2011].
+
+We’ll simulate 90 days of ED visit counts for two hospitals (A and B). Hospital B has a higher baseline and slightly greater day-to-day variability. We then compare Poisson vs. Negative Binomial fits.
+
+```{r}
+#| label: nb-example-simulate
+#| message: false
+#| warning: false
+
+set.seed(20250310)
+
+library(MASS)       # for glm.nb
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+n_days <- 90
+df <- tibble(
+  day  = 1:n_days,
+  # Hospital assignment alternating by week (just to make patterns visible)
+  hosp = if_else(((day - 1) %/% 7) %% 2 == 0, "A", "B")
+) |>
+  mutate(
+    mu   = if_else(hosp == "A", 12, 18),   # mean level
+    size = if_else(hosp == "A", 6, 4),     # NB 'size' (smaller -> more overdispersion)
+    # Simulate NB counts with mean/size parameterization
+    y    = rnbinom(n = n(), mu = mu, size = size)
+  )
+
+# Quick diagnostics: mean vs variance by hospital
+df_sum <- df |>
+  group_by(hosp) |>
+  summarise(
+    mean_y = mean(y),
+    var_y  = var(y),
+    .groups = "drop"
+  )
+
+df_sum
+
+```
+The mean–variance check helps flag overdispersion:
+
+```{r}
+#| label: nb-example-meanvar-plot
+
+ggplot(df, aes(x = hosp, y = y)) +
+  geom_boxplot(outlier.alpha = 0.5) +
+  labs(x = "Hospital", y = "Daily ED visits",
+       title = "Daily ED visits by hospital (simulated)")
+```
+
+
+### Fit Poisson vs. Negative Binomial
+
+We model daily counts with a hospital indicator.  
+
+- A **Poisson GLM** assumes  
+$[\mathrm{Var}(Y \mid X) = \mathbb{E}(Y \mid X),]$  
+
+- A **Negative Binomial GLM** relaxes this assumption and allows  
+$[\mathrm{Var}(Y \mid X) > \mathbb{E}(Y \mid X),]$
+through an extra **dispersion parameter** [@hilbe2011].
+
+
+```{r}
+#| label: nb-example-fit
+
+# Poisson GLM
+fit_pois <- glm(y ~ hosp, data = df, family = poisson())
+
+# Negative Binomial GLM
+fit_nb   <- glm.nb(y ~ hosp, data = df)
+
+# Compare model fit
+tibble(
+  model = c("Poisson", "NegBin"),
+  AIC   = c(AIC(fit_pois), AIC(fit_nb))
+) |>
+  arrange(AIC)
+
+```
+
+A lower AIC indicates better fit. Overdispersion can also be checked for the Poisson model via a simple dispersion statistic:
+
+```{r}
+#| label: nb-example-dispersion
+
+# Residual deviance / df for Poisson (values >> 1 suggest overdispersion)
+dispersion_pois <- sum(residuals(fit_pois, type = "pearson")^2) / fit_pois$df.residual
+dispersion_pois
+```
+**Interpretation**
+
+The Negative Binomial model should produce a lower AIC and a reasonable dispersion, reflecting extra-Poisson variability.
+
+The coefficient for hospB (on the log scale) estimates the multiplicative difference in mean daily visits for B vs. A. Exponentiating the coefficient gives an incidence rate ratio (IRR):
+
+```{r}
+#| label: nb-example-irr
+
+coef_nb <- coef(summary(fit_nb))
+IRR     <- exp(coef_nb["hospB", "Estimate"])
+IRR
+
+```
+
+An $IRR > 1$ indicates Hospital B’s expected daily visits exceed Hospital A’s, after accounting for overdispersion.
+
+**Takeaway:** When count data show variance > mean, the Negative Binomial is a principled alternative to Poisson, improving fit and inference for policy-relevant outcomes like hospital demand [@hilbe2011].

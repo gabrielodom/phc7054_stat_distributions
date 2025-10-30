@@ -34,6 +34,36 @@ suppressPackageStartupMessages(library(tidyverse))
 options(dplyr.summarise.inform = FALSE)
 ```
 
+## Background
+
+The **Exponential distribution** models a **waiting time** until the first event in a Poisson process with constant rate $\lambda>0$. If events occur independently and at a constant average rate, then the time $T$ until the next event has a density
+$[f_{\text{Exp}}(t\mid \lambda)=\lambda e^{-\lambda t},\quad t\ge 0,]$
+with CDF $F(t)=1-e^{-\lambda t}$, mean $\mathbb E[T]=1/\lambda$, and variance $\operatorname{Var}(T)=1/\lambda^2$.
+
+**Key properties**
+- **Memoryless:** $\Pr(T>s+t\mid T>s)=\Pr(T>t)$. The future doesn’t depend on how long you’ve already waited.
+- **Poisson link:** If $N(t)\sim\text{Pois}(\lambda t)$ counts events in time $t$, then the **inter-arrival times** are i.i.d. Exponential($\lambda$). Conversely, summing $k$ i.i.d. Exponential($\lambda$) gives a **Gamma**($k,\lambda$) waiting time for the $k$-th event.
+- **Discrete analogue:** The Exponential mirrors the **Geometric** distribution, which is memoryless on the integers.
+
+These features make the Exponential a natural baseline for **time-to-event** phenomena where the **hazard is constant**.
+
+### Case Study: Inter-arrival Times in Public Health Operations
+
+Consider a **poison control hotline** (or an ED triage desk) where calls (or arrivals) can be treated as a Poisson process over short stationary periods (e.g., overnight hours). If the average **arrival rate** is $\lambda=12$ per hour (one every 5 minutes), then the **waiting time** $T$ between consecutive arrivals should be Exponential($\lambda$):
+- $\Pr(T>10\text{ min})=\exp[-\lambda(10/60)]\approx e^{-2}\approx 0.135$,
+- median wait $\log(2)/\lambda\approx 3.47$ minutes,
+- and the **memoryless** check: $\Pr(T>5+3\mid T>5)=\Pr(T>3)$.
+
+Operationally, this model helps staffing: a constant hazard implies predictable tail risks for long idle periods and for short bursts of back-to-back arrivals (via the Poisson–Exponential connection).
+
+### Current Uses in Biostatistics and Public Health
+
+- **Survival/Time-to-event modeling:** As a **baseline constant-hazard** model; often a starting point before moving to Weibull, Gompertz, or Cox PH when hazards vary.
+- **Health services & operations:** Inter-arrival times for **ED arrivals**, EMS calls, lab submissions, or imaging requests; queueing and capacity planning.
+- **Infectious disease control:** Time between events (e.g., calls, test-positives) during stable phases of surveillance.
+- **Reliability/biomedical devices:** Time to failure for components with approximately constant failure rate (e.g., pumps, sensors) over a phase of their life cycle.
+
+When the hazard is not constant (e.g., learning curves, wear-out), analysts typically move beyond Exponential to more flexible hazard shapes.
 
 
 ## Deriving the Distribution
@@ -170,6 +200,153 @@ par(mfrow = c(1, 1))
 
 </br>
 
+## Example with Data
+`Faithful` eruption data records 250+ observations of the Old Faithful geyser in Yellowstone National Park, Wyoming in the 1970s by the National Park Service. Each observation includes two continuous variables: `eruptions` (duration in minutes) and `waiting` (time to the next eruption in minutes). The data set is found in base R and is often used to study relationships between eruption length and waiting time, as well as to model inter-eruption waiting times as realizations from an exponential or gamma distribution.
+
+```{r}
+data("faithful")
+x <- faithful$waiting
+n <- length(x)
+head(faithful)
+summary(x)
+```
+
+## Variable Distribution
+
+The `waiting` variable contains 272 observations representing minutes between eruptions.
+@fig-faithful-dist shows a histogram of waiting along with a fitted exponential density based on the estimated rate parameter.
+
+```{r}
+#| label: fig-faithful-dist
+#| fig-cap: "Histogram of waiting times with Exponential(λ̂) density"
+#| warning: false
+library(ggplot2)
+library(patchwork)
+
+lambda_hat <- 1 / mean(x)
+
+p_hist <- ggplot(data.frame(x), aes(x)) +
+geom_histogram(aes(y = ..density..), bins = 20, alpha = 0.6, fill = "#1f4e79") +
+stat_function(fun = dexp, args = list(rate = lambda_hat), color = "black", linewidth = 1) +
+labs(x = "Waiting time (min)", y = "Density",
+subtitle = paste("n =", n, "| λ̂ =", signif(lambda_hat, 4),
+"| x̄ =", signif(mean(x), 4))) +
+theme_minimal(base_size = 14)
+
+p_ecdf <- ggplot(data.frame(x), aes(x)) +
+stat_ecdf(geom = "step") +
+stat_function(fun = pexp, args = list(rate = lambda_hat), linetype = 2) +
+labs(x = "Waiting time (min)", y = "ECDF") +
+theme_minimal(base_size = 14)
+
+p_hist / p_ecdf
+```
+
+Note: the exponential model assumes identical rate λ for all intervals, but the data exhibit two eruption regimes, which explains the slight departure from the exponential fit.
+
+## Parameter Estimation
+
+Let $X_1,\ldots,X_n \stackrel{\text{i.i.d.}}{\sim} \mathrm{Exp}(\lambda)$ with pdf $f(x)=\lambda e^{-\lambda x}$ for $x>0$. The parameter is the rate $\lambda>0$.
+
+```{r}
+n <- length(x)
+xbar <- mean(x)
+S <- sum(x)
+```
+
+### Method of Moments (MoM):
+From $\mathbb{E}[X] = 1/\lambda$, matching $\bar{X}$ to $\mathbb{E}[X]$ gives 
+  
+```{r}
+lambda_MoM <- 1 / xbar
+lambda_MoM
+```
+
+### Maximum Likelihood Estimation (MLE):
+Log-likelihood
+  $$
+    \ell(\lambda)= n\log\lambda - \lambda \sum_{i=1}^n x_i.
+  $$
+  Score eqn:
+  $$
+    \frac{d\ell}{d\lambda}=\frac{n}{\lambda}-\sum x_i=0
+    \ \Rightarrow\ 
+    \hat\lambda = \frac{1}{\bar X}.
+  $$
+  
+```{r}
+lambda_MLE <- 1 / xbar
+lambda_MLE == lambda_MoM  # MoM = MLE for Exp
+```
+
+### Asymptotic standard error:
+  $$
+    \operatorname{SE}(\hat\lambda) \approx \frac{\hat\lambda}{\sqrt{n}}.
+  $$
+```{r}
+se_lambda <- lambda_MLE / sqrt(n)
+se_lambda
+```
+
+
+## Moments & Variance
+Theoretical moments for $(X\sim\mathrm{Exp}(\lambda))$:
+  $$
+    \mathbb{E}[X] = \frac{1}{\lambda},\qquad
+   \mathbb{E}[X^2] = \frac{2}{\lambda^2},\qquad
+    \operatorname{Var}(X) = \frac{1}{\lambda^2}.
+  $$
+
+```{r}
+E_X_hat  <- 1 / lambda_MLE
+E_X2_hat <- 2 / (lambda_MLE^2)
+Var_hat  <- 1 / (lambda_MLE^2)
+
+list(E_X_hat = E_X_hat, E_X2_hat = E_X2_hat, Var_hat = Var_hat)
+```
+
+Sanity check for exponential data:
+ $$
+    \operatorname{Var}(X) \approx (\mathbb{E}[X])^2
+    \quad\Rightarrow\quad
+    \frac{s^2}{\bar X^{\,2}} \approx 1.
+  $$
+```{r}
+var(x) / (mean(x)^2)
+```
+
+### Confidence Intervals
+
+Chi-square pivot:
+$$
+2\lambda \sum X_i \;\sim\; \chi^2_{2n} \, 
+$$
+
+CI for $\lambda$:
+$$
+\left[
+\frac{\chi^2_{\alpha/2,\,2n}}{2\sum X_i},\;
+\frac{\chi^2_{1-\alpha/2,\,2n}}{2\sum X_i}
+\right]
+$$
+
+CI for $\mu = 1/\lambda$:
+$$
+\left[
+\frac{2\sum X_i}{\chi^2_{1-\alpha/2,\,2n}},\;
+\frac{2\sum X_i}{\chi^2_{\alpha/2,\,2n}}
+\right]
+$$
+
+```{r}
+alpha <- 0.05
+CI_lambda <- c(qchisq(alpha/2, 2*n)/(2*S), qchisq(1 - alpha/2, 2*n)/(2*S))
+CI_mean   <- c(2*S/qchisq(1 - alpha/2, 2*n), 2*S/qchisq(alpha/2, 2*n))
+
+list(CI_lambda_95 = CI_lambda, CI_mean_95 = CI_mean)
+```
+
+For an exponential distribution, the ratio of the sample variance to the squared sample mean should be close to 1. The much smaller observed value indicates that the waiting times are far less variable than expected under a true exponential process. This strongly rejects the assumption of a single, memoryless rate. The data exhibits two distinct eruption regimes (short and long waiting periods) producing a bimodal distribution rather than a single exponential pattern. Therefore, a single-rate exponential model is not an adequate fit for the faithful data. Better alternatives include a mixture of two exponential or gamma distributions or stratifying the data by eruption type (short vs. long).
 
 
 ## Formal Foundations
@@ -330,16 +507,17 @@ $$
 $$
 Hence, $\hat{\lambda}_{MLE} = \frac{1}{\bar{t}}$.
 
-
-
 </br>
 
 
 
 ## Exercises
 
-To be determined.
+1. Show that the exponential distribution is a valid distribution by taking the limit of the CDF as $t \rightarrow \infty$
 
+2.Show that if $X \sim \text{Unif}(0,1)$, then $Y = -\frac{1}{\lambda}\ln X \sim \text{Exp}(\lambda)$, where $\lambda > 0$
+
+3. Using simulated or real waiting-time data, estimate the rate parameter $\lambda$ of an Exponential distribution, plot the histogram of the observed waiting times with the fitted Exponential curve overlaid, and comment on whether the model provides a good fit.
 
 ## Footnotes 
 

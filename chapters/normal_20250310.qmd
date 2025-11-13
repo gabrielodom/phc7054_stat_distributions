@@ -90,7 +90,7 @@ $$
 &= 0.
 \end{aligned}
 $$
-This may look trivial (obviously the sum of mistakes which centre at 0 should be approximately 0), but it allows us to make more clarifying statements about the original error function. Now, we have that we are looking for some $f(\textbf{E}|\boldsymbol\theta) \ni \nabla\ell(\boldsymbol\theta|\textbf{E}) = 0$^[This upside down triangle is called the "Del" or "nabla" symbol, and it denotes the vector of all possible first-order partial derivatives (because we don't know how many dimensions the parameter space has). See <https://en.wikipedia.org/wiki/Del>]. Notice that this relationship will hold for any properly constructed sample $\textbf{X}$, because we are *constructing* $f$ to have this property.
+This may look trivial (obviously the sum of mistakes which centre at 0 should be approximately 0), but it allows us to make more clarifying statements about the original error function. Now, we have that we are looking for some $f(\textbf{E}|\boldsymbol\theta) \ni \nabla\ell(\boldsymbol\theta|\textbf{E}) = \textbf{0}$^[This $\textbf{0}$ will come from the same vector space as $\boldsymbol\theta$. Also. this upside down triangle is called the "Del" or "nabla" symbol, and it denotes the vector of all possible first-order partial derivatives (because we don't know how many dimensions the parameter space has). See <https://en.wikipedia.org/wiki/Del>]. Notice that this relationship will hold for any properly constructed sample $\textbf{X}$, because we are *constructing* $f$ to have this property.
 
 
 ### Clues About $g_E$
